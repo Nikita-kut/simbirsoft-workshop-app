@@ -11,6 +11,7 @@ package com.nikita.kut.android.simbirsoft_workshop;
  */
 public class ArraysTraining {
 
+
     /**
      * Метод должен сортировать входящий массив
      * по возрастранию пузырьковым методом
