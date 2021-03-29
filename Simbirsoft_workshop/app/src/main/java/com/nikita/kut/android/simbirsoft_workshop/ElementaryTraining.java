@@ -20,8 +20,8 @@ public class ElementaryTraining {
      * @return среднее значение для введенных чисел
      */
     public double averageValue(int firstValue, int secondValue) {
-        //TODO: implement it
-        return 0;
+        return (firstValue + secondValue) / 2.0;
+
     }
 
     /**
@@ -34,8 +34,10 @@ public class ElementaryTraining {
      * @return сумма новых трех чисел
      */
     public double complicatedAmount(int firstValue, int secondValue, int thirdValue) {
-        //TODO: implement it
-        return 0;
+        int first = firstValue * 2;
+        int second = secondValue - 3;
+        int third = thirdValue * thirdValue;
+        return first + second + third;
     }
 
     /**
@@ -47,8 +49,11 @@ public class ElementaryTraining {
      * @return новое значение
      */
     public int changeValue(int value) {
-        //TODO: implement it
-        return value;
+        if (value > 3) {
+            return value + 10;
+        } else {
+            return value - 10;
+        }
     }
 
     /**
@@ -62,8 +67,14 @@ public class ElementaryTraining {
      * @return новое число
      */
     public int swapNumbers(int value) {
-        //TODO: implement it
-        return 0;
+        String valueToText = String.valueOf(value);
+        int countsDigit = String.valueOf(Math.abs(value)).length();
+        if (value < 10 || countsDigit > 5) {
+            return value;
+        } else {
+            valueToText = valueToText.substring(valueToText.length() - 1) + valueToText.substring(1, valueToText.length() - 1) + valueToText.substring(0, 1);
+            return Integer.parseInt(valueToText);
+        }
     }
 
     /**
@@ -77,7 +88,15 @@ public class ElementaryTraining {
      * @return новое число
      */
     public int zeroEvenNumber(int value) {
-        //TODO: implement it
-        return 0;
+        int countsDigit = String.valueOf(Math.abs(value)).length();
+        if (value % 10 == value || countsDigit > 5) {
+            return value;
+        } else {
+            int lastDigit = value % 10;
+            if (lastDigit % 2 == 0) {
+                lastDigit = 0;
+            }
+            return zeroEvenNumber(value / 10) * 10 + lastDigit;
+        }
     }
 }
