@@ -20,6 +20,7 @@ public class ArraysTraining {
      * @return отсортированный массив
      */
     public int[] sort(int[] valuesArray) {
+
         for (int current = 0; current < valuesArray.length - 1; current++) {
             for (int j = valuesArray.length - 1; j > current; j--) {
                 if (valuesArray[j - 1] > valuesArray[j]) {
