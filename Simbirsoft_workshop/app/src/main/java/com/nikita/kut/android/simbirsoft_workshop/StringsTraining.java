@@ -1,5 +1,7 @@
 package com.nikita.kut.android.simbirsoft_workshop;
 
+import java.util.ArrayList;
+
 /**
  * Набор тренингов по работе со строками в java.
  * <p>
@@ -22,8 +24,13 @@ public class StringsTraining {
      * элементов строки text
      */
     public String getOddCharacterString(String text) {
-        //TODO: implement it
-        return "";
+        String returnText = "";
+        char[] chars = text.toCharArray();
+        for (int i = 0; i < chars.length; i = i + 2) {
+            char c = chars[i];
+            returnText = returnText + c;
+        }
+        return returnText;
     }
 
     /**
@@ -36,9 +43,16 @@ public class StringsTraining {
      * идентичных последнему. Если таких нет,
      * вернуть пустой массив
      */
-    public int[] getArrayLastSymbol(String text) {
-        //TODO: implement it
-        return new int[]{};
+    public ArrayList<Integer> getArrayLastSymbol(String text) {
+        char[] chars = text.toCharArray();
+        ArrayList<Integer> returnArray = new ArrayList<>();
+        char lastChar = chars[chars.length - 1];
+        for (int i = 0; i < chars.length; i++) {
+            if (lastChar == chars[i]) {
+                returnArray.add(i + 1);
+            }
+        }
+        return returnArray;
     }
 
     /**
@@ -49,8 +63,13 @@ public class StringsTraining {
      * @return количество цифр в строке
      */
     public int getNumbersCount(String text) {
-        //TODO: implement it
-        return 0;
+        int countOfDigitInText = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isDigit(text.charAt(i))) {
+                countOfDigitInText++;
+            }
+        }
+        return countOfDigitInText;
     }
 
     /**
@@ -61,7 +80,9 @@ public class StringsTraining {
      * @return текст, где цыфры заменены словами
      */
     public String replaceAllNumbers(String text) {
-        //TODO: implement it
+        String[] digitsText = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+        for (char c = '0'; c <= '9'; ++c)
+            text = text.replaceAll(String.valueOf(c), digitsText[c - '0'] + ' ');
         return text;
     }
 
@@ -73,8 +94,16 @@ public class StringsTraining {
      * @return измененная строка
      */
     public String capitalReverse(String text) {
-        //TODO: implement it
-        return text;
+        char[] chars = text.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isUpperCase(chars[i])) {
+                stringBuilder.append(Character.toLowerCase(chars[i]));
+            } else {
+                stringBuilder.append(Character.toUpperCase(chars[i]));
+            }
+        }
+        return stringBuilder.toString();
     }
 
 }

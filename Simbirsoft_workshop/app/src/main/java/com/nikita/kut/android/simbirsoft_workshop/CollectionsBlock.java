@@ -2,6 +2,7 @@ package com.nikita.kut.android.simbirsoft_workshop;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask0(@NonNull List<T> firstList, @NonNull List<T> secondList) {
-        //TODO: implement it
-        return Collections.emptyList();
+        List<T> unionList = new ArrayList<T>();
+        unionList.add((T) firstList);
+        unionList.add((T) secondList);
+        return unionList;
     }
 
     /**
@@ -39,8 +42,12 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask1(@NonNull List<T> inputList) {
-        //TODO: implement it
-        return Collections.emptyList();
+        List<T> outputList = new ArrayList<>();
+        for (int i = 0; i < inputList.size(); i++) {
+            outputList.add(inputList.get(i));
+            outputList.addAll(inputList.subList(0, i));
+        }
+        return outputList;
     }
 
     /**
@@ -52,8 +59,7 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public boolean collectionTask2(@NonNull List<T> firstList, @NonNull List<T> secondList) {
-        //TODO: implement it
-        return true;
+        return firstList.retainAll(secondList) && secondList.retainAll(firstList);
     }
 
     /**
