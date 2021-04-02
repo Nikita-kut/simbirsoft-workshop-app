@@ -1,10 +1,15 @@
 package com.nikita.kut.android.simbirsoft_workshop;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Набор тренингов по работе со строками в java.
@@ -74,8 +79,15 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask3(@NonNull List<T> inputList, int n) {
-        //TODO: implement it
-        return Collections.emptyList();
+        int size = inputList.size();
+        if (size == 0) return inputList;
+
+        T element = null;
+        for (int i = 0; i < n; i++) {
+            element = inputList.remove(size - 1);
+            inputList.add(0, element);
+        }
+        return inputList;
     }
 
     /**
@@ -90,18 +102,201 @@ public class CollectionsBlock<T extends Comparable> {
      */
     public List<String> collectionTask4(@NonNull List<String> inputList, @NonNull String a,
                                         @NonNull String b) {
-        //TODO: implement it
-        return Collections.emptyList();
+        for (int i = 0; i < inputList.size(); i++) {
+            if (inputList.get(i) == a) {
+                inputList.set(i, b);
+            }
+        }
+        return inputList;
     }
+
 
     /*
       Задание подразумевает создание класса(ов) для выполнения задачи.
 
       Дан список студентов. Элемент списка содержит фамилию, имя, отчество, год рождения,
       курс, номер группы, оценки по пяти предметам. Заполните список и выполните задание.
-      Упорядочите студентов по курсу, причем студенты одного курса располагались
-      в алфавитном порядке. Найдите средний балл каждой группы по каждому предмету.
-      Определите самого старшего студента и самого младшего студентов.
-      Для каждой группы найдите лучшего с точки зрения успеваемости студента.
+      1. Упорядочите студентов по курсу, причем студенты одного курса располагались
+      в алфавитном порядке.
+      2. Найдите средний балл каждой группы по каждому предмету.
+      3. Определите самого старшего студента и самого младшего студентов.
+      4. Для каждой группы найдите лучшего с точки зрения успеваемости студента.
      */
+    static class Student {
+        private String surname;
+        private String firstName;
+        private String secondName;
+        private int yearOfBirth;
+        private int course;
+        private int groupNumber;
+        private int mathGrade;
+        private int engGrade;
+        private int physicGrade;
+        private int programmingGrade;
+        private int chemistryGrade;
+
+        Student() {
+        }
+
+        Student(
+                String surname,
+                String firstName,
+                String secondName
+        ) {
+            this.surname = surname;
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.yearOfBirth = randomNumber(1996, 2001);
+            this.course = randomNumber(1, 5);
+            this.groupNumber = randomNumber(10, 15);
+            this.mathGrade = randomNumber(2, 5);
+            this.engGrade = randomNumber(2, 5);
+            this.physicGrade = randomNumber(2, 5);
+            this.programmingGrade = randomNumber(2, 5);
+            this.chemistryGrade = randomNumber(2, 5);
+        }
+
+        int randomNumber(int minRange, int maxRange) {
+            int dif = maxRange - minRange;
+            Random random = new Random();
+            int randomNumber = random.nextInt(dif + 1);
+            randomNumber += minRange;
+            return randomNumber;
+        }
+
+        public List<Student> getListStudent() {
+            Student student1 = new Student("Ivanov", "Ivan", "Ivanov");
+            Student student2 = new Student("Petrov", "Petr", "Petrovich");
+            Student student3 = new Student("Sidorov", "Sidor", "Sidorovich");
+            Student student4 = new Student("Murzikov", "Murzik", "Murzikovich");
+            Student student5 = new Student("Maximov", "Maxim", "Maximovich");
+            List<Student> students = new ArrayList<>();
+            students.add(student1);
+            students.add(student2);
+            students.add(student3);
+            students.add(student4);
+            students.add(student5);
+            return students;
+        }
+
+        public int getCourse() {
+            return course;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public int getYearOfBirth() {
+            return yearOfBirth;
+        }
+
+        public int getGroupNumber() {
+            return groupNumber;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public List<Student> sortByCourseAndAlphabet(List<Student> students) {
+            Collections.sort(students, Comparator.comparing(Student::getCourse)
+                    .thenComparing(Student::getSurname));
+            return students;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public void averageGrade(List<Student> students) {
+            Collections.sort(students, Comparator.comparing(Student::getGroupNumber));
+            List<Student> group10 = new ArrayList<>();
+            List<Student> group11 = new ArrayList<>();
+            List<Student> group12 = new ArrayList<>();
+            List<Student> group13 = new ArrayList<>();
+            List<Student> group14 = new ArrayList<>();
+            List<Student> group15 = new ArrayList<>();
+
+            for (int i = 0; i < students.size(); i++) {
+                Student currentStudent = students.get(i);
+                switch (currentStudent.groupNumber) {
+                    case (10):
+                        group10.add(currentStudent);
+                        break;
+                    case (11):
+                        group11.add(currentStudent);
+                        break;
+                    case (12):
+                        group12.add(currentStudent);
+                        break;
+                    case (13):
+                        group13.add(currentStudent);
+                        break;
+                    case (14):
+                        group14.add(currentStudent);
+                        break;
+                    case (15):
+                        group15.add(currentStudent);
+                        break;
+                }
+            }
+
+            System.out.println("Group 10 average grade");
+            printAverageGrade(group10);
+            System.out.println("Group 11 average grade");
+            printAverageGrade(group11);
+            System.out.println("Group 12 average grade");
+            printAverageGrade(group12);
+            System.out.println("Group 13 average grade");
+            printAverageGrade(group13);
+            System.out.println("Group 14 average grade");
+            printAverageGrade(group14);
+            System.out.println("Group 15 average grade");
+            printAverageGrade(group15);
+        }
+
+        private void printAverageGrade(List<Student> students) {
+            int mathGrade = 0;
+            int engGrade = 0;
+            int physicGrade = 0;
+            int programmingGrade = 0;
+            int chemistryGrade = 0;
+            if (students.size() != 0) {
+                for (int i = 0; i < students.size(); i++) {
+                    Student currentStudent = students.get(i);
+                    mathGrade += currentStudent.mathGrade;
+                    engGrade += currentStudent.engGrade;
+                    physicGrade += currentStudent.physicGrade;
+                    programmingGrade += currentStudent.programmingGrade;
+                    chemistryGrade += currentStudent.chemistryGrade;
+                }
+                System.out.println(" Math = " + mathGrade / students.size() + " Eng = " + engGrade / students.size() +
+                        " Physic = " + physicGrade / students.size() + " Programming = " + programmingGrade / students.size() +
+                        " Chemistry = " + chemistryGrade / students.size() + "");
+            }
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Student getOldestStudent(List<Student> students) {
+            return Collections.min(students, Comparator.comparing(Student::getYearOfBirth));
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Student getYoungestStudent(List<Student> students) {
+            return Collections.max(students, Comparator.comparing(Student::getYearOfBirth));
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "surname='" + surname + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", secondName='" + secondName + '\'' +
+                    ", yearOfBirth=" + yearOfBirth +
+                    ", course=" + course +
+                    ", groupNumber=" + groupNumber +
+                    ", mathGrade=" + mathGrade +
+                    ", engGrade=" + engGrade +
+                    ", physicGrade=" + physicGrade +
+                    ", programmingGrade=" + programmingGrade +
+                    ", chemistryGrade=" + chemistryGrade +
+                    '}';
+        }
+    }
 }
+
