@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 /**
  * Набор тренингов по работе со строками в java.
@@ -34,8 +37,8 @@ public class CollectionsBlock<T extends Comparable> {
      */
     public List<T> collectionTask0(@NonNull List<T> firstList, @NonNull List<T> secondList) {
         List<T> unionList = new ArrayList<T>();
-        unionList.add((T) firstList);
-        unionList.add((T) secondList);
+        unionList.addAll(firstList);
+        unionList.addAll(secondList);
         return unionList;
     }
 
@@ -195,6 +198,26 @@ public class CollectionsBlock<T extends Comparable> {
             return groupNumber;
         }
 
+        public int getChemistryGrade() {
+            return chemistryGrade;
+        }
+
+        public int getEngGrade() {
+            return engGrade;
+        }
+
+        public int getPhysicGrade() {
+            return physicGrade;
+        }
+
+        public int getMathGrade() {
+            return mathGrade;
+        }
+
+        public int getProgrammingGrade() {
+            return programmingGrade;
+        }
+
         @RequiresApi(api = Build.VERSION_CODES.N)
         public List<Student> sortByCourseAndAlphabet(List<Student> students) {
             Collections.sort(students, Comparator.comparing(Student::getCourse)
@@ -203,72 +226,8 @@ public class CollectionsBlock<T extends Comparable> {
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
-        public void averageGrade(List<Student> students) {
-            Collections.sort(students, Comparator.comparing(Student::getGroupNumber));
-            List<Student> group10 = new ArrayList<>();
-            List<Student> group11 = new ArrayList<>();
-            List<Student> group12 = new ArrayList<>();
-            List<Student> group13 = new ArrayList<>();
-            List<Student> group14 = new ArrayList<>();
-            List<Student> group15 = new ArrayList<>();
-
-            for (int i = 0; i < students.size(); i++) {
-                Student currentStudent = students.get(i);
-                switch (currentStudent.groupNumber) {
-                    case (10):
-                        group10.add(currentStudent);
-                        break;
-                    case (11):
-                        group11.add(currentStudent);
-                        break;
-                    case (12):
-                        group12.add(currentStudent);
-                        break;
-                    case (13):
-                        group13.add(currentStudent);
-                        break;
-                    case (14):
-                        group14.add(currentStudent);
-                        break;
-                    case (15):
-                        group15.add(currentStudent);
-                        break;
-                }
-            }
-
-            System.out.println("Group 10 average grade");
-            printAverageGrade(group10);
-            System.out.println("Group 11 average grade");
-            printAverageGrade(group11);
-            System.out.println("Group 12 average grade");
-            printAverageGrade(group12);
-            System.out.println("Group 13 average grade");
-            printAverageGrade(group13);
-            System.out.println("Group 14 average grade");
-            printAverageGrade(group14);
-            System.out.println("Group 15 average grade");
-            printAverageGrade(group15);
-        }
-
-        private void printAverageGrade(List<Student> students) {
-            int mathGrade = 0;
-            int engGrade = 0;
-            int physicGrade = 0;
-            int programmingGrade = 0;
-            int chemistryGrade = 0;
-            if (students.size() != 0) {
-                for (int i = 0; i < students.size(); i++) {
-                    Student currentStudent = students.get(i);
-                    mathGrade += currentStudent.mathGrade;
-                    engGrade += currentStudent.engGrade;
-                    physicGrade += currentStudent.physicGrade;
-                    programmingGrade += currentStudent.programmingGrade;
-                    chemistryGrade += currentStudent.chemistryGrade;
-                }
-                System.out.println(" Math = " + mathGrade / students.size() + " Eng = " + engGrade / students.size() +
-                        " Physic = " + physicGrade / students.size() + " Programming = " + programmingGrade / students.size() +
-                        " Chemistry = " + chemistryGrade / students.size() + "");
-            }
+        public Map<Integer, Double> averageGrade(List<Student> students, ToIntFunction<? super Student> mapper) {
+            return students.stream().collect(Collectors.groupingBy(Student::getCourse, Collectors.averagingInt(mapper)));
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)

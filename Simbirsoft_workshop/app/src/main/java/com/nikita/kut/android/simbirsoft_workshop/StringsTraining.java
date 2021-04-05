@@ -1,6 +1,8 @@
 package com.nikita.kut.android.simbirsoft_workshop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Набор тренингов по работе со строками в java.
@@ -79,10 +81,27 @@ public class StringsTraining {
      * @param text текст для поиска и замены
      * @return текст, где цыфры заменены словами
      */
+
+    // Метод точно работает, в main activity тестил
     public String replaceAllNumbers(String text) {
         String[] digitsText = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
         for (char c = '0'; c <= '9'; ++c)
             text = text.replaceAll(String.valueOf(c), digitsText[c - '0'] + ' ');
+        return text;
+    }
+
+    public String replaceAllNumbers2(String text) {
+        HashMap<Character, String> map = new HashMap();
+        map.put('0', "Zero");
+        map.put('1', "One");
+        map.put('2', "Two");
+        map.put('3', "Three");
+        map.put('4', "Four");
+        map.put('5', "Five");
+        map.put('6', "Six");
+        map.put('7', "Seven");
+        map.put('8', "Eight");
+        map.put('9', "Nine");
         return text;
     }
 

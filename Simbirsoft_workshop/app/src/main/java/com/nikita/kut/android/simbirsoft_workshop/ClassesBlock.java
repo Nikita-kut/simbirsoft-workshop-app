@@ -89,30 +89,16 @@ public interface ClassesBlock {
             return array;
         }
 
-        public int[] fillArrayRandomNumber(int[] inputArray) {
-            int size = inputArray.length;
+        public void fillArrayRandomNumber() {
+            int size = array.length;
             Random random = new Random();
             for (int i = 0; i < size; i++) {
-                inputArray[i] = random.nextInt();
+                array[i] = random.nextInt();
             }
-            return inputArray;
         }
 
-        public int[] mixArray(int[] inputArray) {
-            Random random = new Random();
-            List<Integer> indexes = new ArrayList<>(inputArray.length);
-            int count = 0;
-            while (true) {
-                int randomInt = random.nextInt(inputArray.length);
-                if (!indexes.contains(randomInt)) {
-                    indexes.add(randomInt);
-                    inputArray[randomInt] = inputArray[count++];
-                }
-                if (count == inputArray.length) {
-                    break;
-                }
-            }
-            return inputArray;
+        public void mixArray() {
+            Collections.shuffle(Collections.singletonList(array));
         }
 
         public int findNumberCount(int n, int[] inputArray) {
@@ -652,7 +638,7 @@ public interface ClassesBlock {
         private String name;
         private int price;
 
-        public Product (String name, int price) {
+        public Product(String name, int price) {
             this.name = name;
             this.price = price;
         }
@@ -669,7 +655,7 @@ public interface ClassesBlock {
             this.name = name;
         }
 
-        public void setPrice (int price) {
+        public void setPrice(int price) {
             this.price = price;
         }
     }
@@ -688,8 +674,8 @@ public interface ClassesBlock {
         }
 
         public void showOrder() {
-            for (Product e: orderlist) {
-                System.out.println (e);
+            for (Product e : orderlist) {
+                System.out.println(e);
             }
         }
 
@@ -727,7 +713,7 @@ public interface ClassesBlock {
         }
 
         public void pay() {
-            if(order.isPayment()) {
+            if (order.isPayment()) {
                 System.out.println("Вы уже оплатили заказ");
             } else {
                 order.setPayment(true);
@@ -735,9 +721,9 @@ public interface ClassesBlock {
         }
 
         public void take() {
-            if(!order.isPayment()) {
+            if (!order.isPayment()) {
                 System.out.println("Вы ещё не оплатили товар");
-            } else if(!order.isRegister()) {
+            } else if (!order.isRegister()) {
                 System.out.println("Ваша заявка ещё не обработана");
             } else {
                 System.out.println("Спасибо за покупку!");
@@ -758,7 +744,7 @@ public interface ClassesBlock {
         }
 
         public void createNewProduct(String name, int price) {
-            products.add(new Product(name,price));
+            products.add(new Product(name, price));
         }
     }
 }
