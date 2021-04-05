@@ -1,9 +1,18 @@
 package com.nikita.kut.android.simbirsoft_workshop;
 
-import androidx.annotation.NonNull;
+import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 /**
  * Набор тренингов по работе со строками в java.
@@ -27,8 +36,10 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask0(@NonNull List<T> firstList, @NonNull List<T> secondList) {
-        //TODO: implement it
-        return Collections.emptyList();
+        List<T> unionList = new ArrayList<T>();
+        unionList.addAll(firstList);
+        unionList.addAll(secondList);
+        return unionList;
     }
 
     /**
@@ -39,8 +50,12 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask1(@NonNull List<T> inputList) {
-        //TODO: implement it
-        return Collections.emptyList();
+        List<T> outputList = new ArrayList<>();
+        for (int i = 0; i < inputList.size(); i++) {
+            outputList.add(inputList.get(i));
+            outputList.addAll(inputList.subList(0, i));
+        }
+        return outputList;
     }
 
     /**
@@ -52,8 +67,7 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public boolean collectionTask2(@NonNull List<T> firstList, @NonNull List<T> secondList) {
-        //TODO: implement it
-        return true;
+        return firstList.retainAll(secondList) && secondList.retainAll(firstList);
     }
 
     /**
@@ -68,8 +82,15 @@ public class CollectionsBlock<T extends Comparable> {
      * @throws NullPointerException если один из параметров null
      */
     public List<T> collectionTask3(@NonNull List<T> inputList, int n) {
-        //TODO: implement it
-        return Collections.emptyList();
+        int size = inputList.size();
+        if (size == 0) return inputList;
+
+        T element = null;
+        for (int i = 0; i < n; i++) {
+            element = inputList.remove(size - 1);
+            inputList.add(0, element);
+        }
+        return inputList;
     }
 
     /**
@@ -84,18 +105,157 @@ public class CollectionsBlock<T extends Comparable> {
      */
     public List<String> collectionTask4(@NonNull List<String> inputList, @NonNull String a,
                                         @NonNull String b) {
-        //TODO: implement it
-        return Collections.emptyList();
+        for (int i = 0; i < inputList.size(); i++) {
+            if (inputList.get(i) == a) {
+                inputList.set(i, b);
+            }
+        }
+        return inputList;
     }
+
 
     /*
       Задание подразумевает создание класса(ов) для выполнения задачи.
 
       Дан список студентов. Элемент списка содержит фамилию, имя, отчество, год рождения,
       курс, номер группы, оценки по пяти предметам. Заполните список и выполните задание.
-      Упорядочите студентов по курсу, причем студенты одного курса располагались
-      в алфавитном порядке. Найдите средний балл каждой группы по каждому предмету.
-      Определите самого старшего студента и самого младшего студентов.
-      Для каждой группы найдите лучшего с точки зрения успеваемости студента.
+      1. Упорядочите студентов по курсу, причем студенты одного курса располагались
+      в алфавитном порядке.
+      2. Найдите средний балл каждой группы по каждому предмету.
+      3. Определите самого старшего студента и самого младшего студентов.
+      4. Для каждой группы найдите лучшего с точки зрения успеваемости студента.
      */
+    static class Student {
+        private String surname;
+        private String firstName;
+        private String secondName;
+        private int yearOfBirth;
+        private int course;
+        private int groupNumber;
+        private int mathGrade;
+        private int engGrade;
+        private int physicGrade;
+        private int programmingGrade;
+        private int chemistryGrade;
+
+        Student() {
+        }
+
+        Student(
+                String surname,
+                String firstName,
+                String secondName
+        ) {
+            this.surname = surname;
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.yearOfBirth = randomNumber(1996, 2001);
+            this.course = randomNumber(1, 5);
+            this.groupNumber = randomNumber(10, 15);
+            this.mathGrade = randomNumber(2, 5);
+            this.engGrade = randomNumber(2, 5);
+            this.physicGrade = randomNumber(2, 5);
+            this.programmingGrade = randomNumber(2, 5);
+            this.chemistryGrade = randomNumber(2, 5);
+        }
+
+        int randomNumber(int minRange, int maxRange) {
+            int dif = maxRange - minRange;
+            Random random = new Random();
+            int randomNumber = random.nextInt(dif + 1);
+            randomNumber += minRange;
+            return randomNumber;
+        }
+
+        public List<Student> getListStudent() {
+            Student student1 = new Student("Ivanov", "Ivan", "Ivanov");
+            Student student2 = new Student("Petrov", "Petr", "Petrovich");
+            Student student3 = new Student("Sidorov", "Sidor", "Sidorovich");
+            Student student4 = new Student("Murzikov", "Murzik", "Murzikovich");
+            Student student5 = new Student("Maximov", "Maxim", "Maximovich");
+            List<Student> students = new ArrayList<>();
+            students.add(student1);
+            students.add(student2);
+            students.add(student3);
+            students.add(student4);
+            students.add(student5);
+            return students;
+        }
+
+        public int getCourse() {
+            return course;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public int getYearOfBirth() {
+            return yearOfBirth;
+        }
+
+        public int getGroupNumber() {
+            return groupNumber;
+        }
+
+        public int getChemistryGrade() {
+            return chemistryGrade;
+        }
+
+        public int getEngGrade() {
+            return engGrade;
+        }
+
+        public int getPhysicGrade() {
+            return physicGrade;
+        }
+
+        public int getMathGrade() {
+            return mathGrade;
+        }
+
+        public int getProgrammingGrade() {
+            return programmingGrade;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public List<Student> sortByCourseAndAlphabet(List<Student> students) {
+            Collections.sort(students, Comparator.comparing(Student::getCourse)
+                    .thenComparing(Student::getSurname));
+            return students;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Map<Integer, Double> averageGrade(List<Student> students, ToIntFunction<? super Student> mapper) {
+            return students.stream().collect(Collectors.groupingBy(Student::getCourse, Collectors.averagingInt(mapper)));
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Student getOldestStudent(List<Student> students) {
+            return Collections.min(students, Comparator.comparing(Student::getYearOfBirth));
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public Student getYoungestStudent(List<Student> students) {
+            return Collections.max(students, Comparator.comparing(Student::getYearOfBirth));
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "surname='" + surname + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", secondName='" + secondName + '\'' +
+                    ", yearOfBirth=" + yearOfBirth +
+                    ", course=" + course +
+                    ", groupNumber=" + groupNumber +
+                    ", mathGrade=" + mathGrade +
+                    ", engGrade=" + engGrade +
+                    ", physicGrade=" + physicGrade +
+                    ", programmingGrade=" + programmingGrade +
+                    ", chemistryGrade=" + chemistryGrade +
+                    '}';
+        }
+    }
 }
+
