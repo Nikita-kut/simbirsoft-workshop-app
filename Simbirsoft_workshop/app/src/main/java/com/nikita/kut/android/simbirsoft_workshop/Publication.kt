@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop.`kotlin-part-1`
+package com.nikita.kut.android.simbirsoft_workshop
 
 interface Publication {
     val price: Double

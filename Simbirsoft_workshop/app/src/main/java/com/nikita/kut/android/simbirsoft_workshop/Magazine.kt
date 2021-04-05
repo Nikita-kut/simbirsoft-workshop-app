@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop.`kotlin-part-1`
+package com.nikita.kut.android.simbirsoft_workshop
 
 class Magazine(override val price: Double, override val wordCount: Int) : Publication {
 
@@ -9,4 +9,10 @@ class Magazine(override val price: Double, override val wordCount: Int) : Public
             else -> "Magazine"
         }
     }
+
+    override fun toString(): String {
+        return "(price = $price euro, wordCount = $wordCount)"
+    }
+
+
 }
