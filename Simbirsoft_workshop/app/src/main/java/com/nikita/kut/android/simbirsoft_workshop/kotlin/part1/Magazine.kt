@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.kotlin.part1
 
 class Magazine(override val price: Double, override val wordCount: Int) : Publication {
 
