@@ -9,9 +9,9 @@ fun main() {
     val user = User(name = "Test", age = 5, type = Type.FULL)
 
     // 3 task
-    println(user.getStartTime())
+    println(user.startTime)
     Thread.sleep(1000)
-    println(user.getStartTime())
+    println(user.startTime)
 
     //4 task
     val users = mutableListOf(User(name = "User1", age = 1, type = Type.FULL)).apply {
@@ -23,10 +23,7 @@ fun main() {
     val usersTypeFull = users.filter { it.type == Type.FULL }
 
     //6 task
-    val usersName: MutableList<String> = mutableListOf()
-    for (element in users) {
-        usersName.add(element.name)
-    }
+    val usersName = users.map { it.name }
     println(
         """
         First element ${usersName.first()}
@@ -51,12 +48,12 @@ fun main() {
     auth({ updateCache() }, userTeenage)
 
     //12 task
-    val registration = Registration()
+    val registration = Registration
     val login = Login(userAdult)
-    val logout = Logout()
-    doAction(registration, userAdult)
-    doAction(login, userAdult)
-    doAction(logout, userAdult)
+    val logout = Logout
+    doAction(registration)
+    doAction(login)
+    doAction(logout)
 }
 
 //8 task
@@ -87,10 +84,10 @@ inline fun auth(update: () -> Unit, user: User) {
 
 //12 task
 @RequiresApi(Build.VERSION_CODES.O)
-fun doAction(action: Action, user: User) {
+fun doAction(action: Action) {
     when (action) {
         is Registration -> println("Registration completed successfully")
-        is Login -> auth({ updateCache() }, user)
+        is Login -> auth({ updateCache() }, action.user)
         is Logout -> println("Logout successfully")
         else -> {
         }

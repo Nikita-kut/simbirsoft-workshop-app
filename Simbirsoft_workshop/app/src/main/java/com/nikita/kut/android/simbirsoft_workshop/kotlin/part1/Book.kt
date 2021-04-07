@@ -1,6 +1,9 @@
 package com.nikita.kut.android.simbirsoft_workshop.kotlin.part1
 
-class Book(override val price: Double, override val wordCount: Int) : Publication {
+class Book(
+    override val price: Double,
+    override val wordCount: Int
+) : Publication {
 
     override fun getType(): String {
         return when {

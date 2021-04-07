@@ -16,12 +16,6 @@ data class User(
 ) {
     private val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
 
-    private lateinit var startTime: String
-
-    @JvmName("getStartTime1")
-    fun getStartTime(): String {
-        startTime = dtf.format(LocalTime.now())
-        return startTime
-    }
+    val startTime: String by lazy { dtf.format(LocalTime.now()) }
 }
 

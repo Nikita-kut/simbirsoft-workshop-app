@@ -23,8 +23,11 @@ fun main() {
     val sum = { x: Int, y: Int -> println("Sum is ${x + y}") }
 
     sum(5, 10)
+
+
 }
 
 fun buy(publication: Publication?) {
     println("The purchase is complete. The purchase amount was ${publication?.price}")
 }
+
