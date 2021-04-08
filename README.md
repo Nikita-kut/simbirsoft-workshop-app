@@ -199,3 +199,177 @@
  У класса `Book` переопределить метод `equals` и произвести сравнение сначала по ссылке, затем используя метод `equals`. Результаты сравнений вывести в лог.
 3. Создать метод `buy`, который в качестве параметра принимает `Publication` (notnull - значения) и выводит в лог “The purchase is complete. The purchase amount was [цена издания]”. Создать две переменных класса `Book`, в которых могут находиться null значения. Присвоить одной null, а второй любое notnull значение и вызвать метод `buy` с каждой из переменных.
 4. Создать переменную `sum` и присвоить ей лямбда-выражение, которое будет складывать два переданных ей числа и выводить результат в лог. Вызвать данное лямбда-выражение с произвольными параметрами.
+
+
+
+
+---
+## V. Kotlin. Часть 2.
+---
+### Теоретическая часть
+
+ **1. Коллекции**
+ + [Коллекции](https://kotlinlang.org/docs/reference/collections-overview.html) **(\*\*\*\*)**
+ + [Создание коллекций](https://kotlinlang.org/docs/reference/constructing-collections.html) **(\*\*\*\*)**
+ + [Обзор операций для коллекций](https://kotlinlang.org/docs/reference/collection-operations.html) **(\*\*\*\*)**
+ + [Преобразования коллекций](https://kotlinlang.org/docs/reference/collection-transformations.html) **(\*\*\*\*)**
+ + [Фильтрация коллекций](https://kotlinlang.org/docs/reference/collection-filtering.html) **(\*\*\*\*)**
+ + [Группировка коллекций](https://kotlinlang.org/docs/reference/collection-grouping.html) **(\*\*\*\*)**
+ + [Получение частей коллекции](https://kotlinlang.org/docs/reference/collection-parts.html) **(\*\*\*\*)**
+ + [Получение элементов коллекции](https://kotlinlang.org/docs/reference/collection-elements.html) **(\*\*\*\*)**
+ + [Сортировка коллекции](https://kotlinlang.org/docs/reference/collection-ordering.html) **(\*\*\*\*)**
+ + [Операторы записи](https://kotlinlang.org/docs/reference/collection-write.html) **(\*\*\*\*)**
+ + [Итераторы](https://kotlinlang.org/docs/reference/iterators.html) **(\*\*\*)**
+ + [Интервалы](https://kotlinlang.ru/docs/reference/ranges.html) **(\*\*\*)**
+ + [Последовательности](https://kotlinlang.org/docs/reference/sequences.html) **(\*\*\*)**
+ + [Операторы плюс и минус](https://kotlinlang.org/docs/reference/collection-plus-minus.html) **(\*\*\*)**
+ + [Операторы объединения](https://kotlinlang.org/docs/reference/collection-aggregate.html) **(\*\*\*)**
+ + [Особые операторы для списков](https://kotlinlang.org/docs/reference/list-operations.html) **(\*\*\*)**
+ + [Особые операторы для множеств](https://kotlinlang.org/docs/reference/set-operations.html) **(\*\*\*)**
+ + [Особые операторы для 'Map'](https://kotlinlang.org/docs/reference/map-operations.html) **(\*\*\*)**
+
+ **2. Расширенный раздел**
+ + [Исключения](https://kotlinlang.ru/docs/reference/exceptions.html) **(\*\*\*\*)**
+ + [Расширения (функции и свойства)](https://kotlinlang.ru/docs/reference/extensions.html) **(\*\*\*\*)**
+ + [Классы данных](https://kotlinlang.ru/docs/reference/data-classes.html) **(\*\*\*\*)**
+ + [Изолированные классы](https://kotlinlang.ru/docs/reference/sealed-classes.html) **(\*\*\*\*)**
+ + [Generics](https://kotlinlang.ru/docs/reference/generics.html) **(\*\*\*\*)**
+ + [Вложенные классы](https://kotlinlang.ru/docs/reference/nested-classes.html) **(\*\*\*\*)**
+ + [Enum](https://kotlinlang.ru/docs/reference/enum-classes.html) **(\*\*\*\*)**
+ + [Объекты](https://kotlinlang.ru/docs/reference/object-declarations.html) **(\*\*\*\*)**
+ + [Делегирование](https://kotlinlang.ru/docs/reference/delegation.html) **(\*\*\*\*)**
+ + [Делегированные свойства](https://kotlinlang.ru/docs/reference/delegated-properties.html) **(\*\*\*\*)**
+ + [Встроенные функции](https://kotlinlang.ru/docs/reference/inline-functions.html) **(\*\*\*\*)**
+ + [Аннотации](https://kotlinlang.ru/docs/reference/annotations.html) **(\*\*\*)**
+ + [Приведение и проверка типов](https://kotlinlang.ru/docs/reference/typecasts.html) **(\*\*\*)**
+ + [Функциональные интерфейсы (SAM)](https://kotlinlang.org/docs/reference/fun-interfaces.html) **(\*\*)**
+ + [Псевдонимы типов](https://kotlinlang.ru/docs/reference/type-aliases.html) **(\*\*)**
+ + [Встроенные классы](https://kotlinlang.org/docs/reference/inline-classes.html) **(\*\*)**
+ + [Мульти-декларации](https://kotlinlang.ru/docs/reference/multi-declarations.html) **(\*\*)**
+ + [Перегрузка операторов](https://kotlinlang.ru/docs/reference/operator-overloading.html) **(\*\*)**
+ + [Рефлексия](https://kotlinlang.ru/docs/reference/reflection.html) **(\*\*)**
+ 
+ **3. Лучшие практики**
+ + [Идиомы](https://kotlinlang.ru/docs/reference/idioms.html) **(\*\*\*)**
+ + [Стилистика кода](https://kotlinlang.ru/docs/reference/coding-conventions.html) **(\*\*\*)**
+ + [Лучшие практики](https://phauer.com/2017/idiomatic-kotlin-best-practices/) **(\*\*\*)**
+ + [Лучшие практики для написания чистого кода](https://blog.intive-fdv.com/best-practices-to-write-a-clean-code-with-kotlin-part-ii/) **(\*\*\*)**
+ + [Использование последовательностей](https://blog.kotlin-academy.com/effective-kotlin-use-sequence-for-bigger-collections-with-more-than-one-processing-step-649a15bb4bf) **(\*\*\*)**
+ + [Лучшие практики для написания тестов](https://resources.jetbrains.com/storage/products/kotlinconf2018/slides/4_Best%20Practices%20for%20Unit%20Testing%20in%20Kotlin.pdf) **(\*\*)**
+ 
+ **4. Антипаттерны**
+ + [Антипаттерны](https://github.com/Zhuinden/guide-to-kotlin/wiki), см. часть 6 - Антипаттерны **(\*\*\*)**
+ + [Ещё немного антипаттернов](https://www.notion.so/Java-Kotlin-fdd36663b9e4452b9c605107761278b4) **(\*\*\*)**
+
+ **5. Kotlin koans**
+ + [Kotlin koans](https://www.jetbrains.com/help/education/learner-start-guide.html?section=Kotlin%20Koans)
+ 
+### Практическое задание
+**Важно!**
+Работа должна производится в созданном ранее проекте в отдельном файле. Задачи должны быть разделены комментариями, указывающими на номер или текст задания.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `kotlin-part-2` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style.
+
+1. Создать enum `Type` с константами `DEMO` и `FULL`. 
+2. Реализовать класс данных `User` с полями `id`, `name`, `age` и `type`. У класса `User` создать ленивое свойство `startTime`, в котором получаем текущее время. 
+3. Создать объект класса `User`, вывести в лог startTime данного юзера, после вызвать Thread.sleep(1000) и повторно вывести в лог startTime.
+4. Создать список пользователей, содержащий в себе один объект класса `User`. Используя функцию **apply**, добавить ещё несколько объектов класса `User` в список пользователей. 
+5. Получить список пользователей, у которых имеется полный доступ (поле `type` имеет значение `FULL`). 
+6. Преобразовать список `User` в список имен пользователей. Получить первый и последний элементы списка и вывести их в лог.
+7. Создать функцию-расширение класса `User`, которая проверяет, что юзер старше 18 лет, и в случае успеха выводит в лог, а в случае неуспеха возвращает ошибку.
+8. Создать интерфейс `AuthCallback` с методами `authSuccess`, `authFailed` и реализовать анонимный объект данного интерфейса. В методах необходимо вывести в лог информацию о статусе авторизации.
+9. Реализовать **inline** функцию `auth`, принимающую в качестве параметра функцию `updateCache`. Функция `updateCache `должна выводить в лог информацию об обновлении кэша. 
+10. Внутри функции `auth` вызвать метод коллбека `authSuccess` и переданный `updateCache`, если проверка возраста пользователя произошла без ошибки. В случае получения ошибки вызвать `authFailed`.
+11. Реализовать изолированный класс `Action` и его наследников – `Registration`, `Login` и `Logout`. `Login` должен принимать в качестве параметра экземпляр класса User. 
+12. Реализовать метод `doAction`, принимающий экземпляр класса `Action`. В зависимости от переданного действия выводить в лог текст, к примеру “Auth started”. Для действия `Login` вызывать метод `auth`.
+
+
+
+
+---
+## VI. Верстка
+---
+### Теоретическая часть
+
+В случае если по ссылке встречается пошаговый гайд - рекомендуется его выполнить в отдельном проекте.
+
+**1. Начало разработки под Android**
++ [Начало разаработки](https://developer.android.com/training/index.html) **(\*\*\*\*)**
+
+**2. Верстка**
++ [Уроки верстки из курсов](http://startandroid.ru/ru/uroki/vse-uroki-spiskom.html) **(\*\*)**
++ [Создание макетов в XML и View groups](https://developer.android.com/guide/topics/ui/declaring-layout.html) **(\*\*\*)**
+
+**3. Типы layout'ов**
++ [Frame Layout](http://developer.alexanderklimov.ru/android/layout/framelayout.php) **(\*\*\*\*)**
++ [Linear Layout](https://developer.android.com/guide/topics/ui/layout/linear.html) **(\*\*\*\*)**
++ [Relative Layout](https://developer.android.com/guide/topics/ui/layout/relative.html) (если есть возможность, лучше использовать Constraint) **(\*\*\*\*)**
+
+**4. Splash Screen**
++ [Как правильно реализовать](https://habr.com/ru/post/345380/) **(\*\*\*\*)**
+
+**5. BottomAppBar**
++ [Обзор](https://developer.android.com/reference/com/google/android/material/bottomappbar/BottomAppBar) **(\*\*\*\*)**
+
+**6. App Bar**
++ [Обзор](https://developer.android.com/training/appbar) **(\*\*\*\*)**
+
+**7. Constraint Layout**
++ [Документация](https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html) **(\*\*\*\*)**
++ [Работа с различными свойствами](https://habrahabr.ru/company/touchinstinct/blog/326814/) **(\*\*\*\*)**
+
+**8. Coordinator Layout**
++ [Документация](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout?hl=ru) **(\*\*\*\*)**
++ [Особенности использования](https://blog.mindorks.com/using-coordinator-layout-in-android) **(\*\*\*\*)**
+
+**9. Ресурсы**
++ [Обзор](https://developer.android.com/guide/topics/resources/providing-resources) **(\*\*\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – MyFirstApp (Часть 1) Роман Григорьев](https://youtu.be/jVwGU3UJVPc) Описывает ресурсы андроид приложения, а так же различие релизной, дебажной сборки и signing config **(\*\*)**
++ [Локализация](https://developer.android.com/guide/topics/resources/localization) **(\*\*)**
++ [Типы ресурсов](https://developer.android.com/guide/topics/resources/available-resources) **(\*\*)**
++ [Шрифты в XML](https://developer.android.com/guide/topics/ui/look-and-feel/fonts-in-xml.html) **(\*\*)**
++ [Загружаемые шрифты](https://developer.android.com/guide/topics/ui/look-and-feel/downloadable-fonts.html) **(\*\*)**
++ [Поддержка разных экранов](https://developer.android.com/guide/practices/screens_support.html) **(\*\*)**
++ [Zeplin](https://habrahabr.ru/company/uteam/blog/315542/) **(\*\*\*)**
+ 
+**10. Codelabs**
++ [Your first interactive UI](https://codelabs.developers.google.com/codelabs/android-training-layout-editor-part-a/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [The layout editor](https://codelabs.developers.google.com/codelabs/android-training-layout-editor-part-b/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Text and scrolling views](https://codelabs.developers.google.com/codelabs/android-training-text-and-scrolling-views/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Drawables, styles, and themes](https://codelabs.developers.google.com/codelabs/android-training-drawables-styles-and-themes/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Clickable images](https://codelabs.developers.google.com/codelabs/android-training-clickable-images/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Input controls](https://codelabs.developers.google.com/codelabs/android-training-input-controls/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Menus and pickers](https://codelabs.developers.google.com/codelabs/android-training-menus-and-pickers/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [User navigation](https://codelabs.developers.google.com/codelabs/android-training-provide-user-navigation/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Adaptive layouts](https://codelabs.developers.google.com/codelabs/android-training-adaptive-layouts/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
+
+
+**Важно** В компании при разработке любого мобильного приложения считается правилом хорошего тона придерживаться нефункциональных требований, описанных в [данной статье](http://kb.simbirsoft/nonfunctional-support/)
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте из блока I.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `layouts` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style. В системе PS также необходимо создать созвучную задачу, в которую после завершения будет залогировано время.
+
+1. Сделать так, чтобы на домашнем экране Android отображалась иконка и название приложения "Хочу помочь". Ресурсы иконок [тут](https://zpl.io/2jkoMOp).
+2. Реализовать Splash Screen согласно [макету](https://zpl.io/2jlk3Mm).
+3. Реализовать экран "Профиль" согласно [макету](https://zpl.io/b6lQpZq).
+ - Экран "Профиль" необходимо отображать после Splash Screen. По нажатию стрелки назад, приложение закрывается.
+ - Необходимо реализовать нижний элемент навигации с помощью стандартного `BottomNavigationView`. Пункт "Помочь" визуально не должен отличаться от остальных четырех. Размеры иконок оставить стандартные для `BottomNavigationView` - 24dp.
+ - В нижнем меню навигации по-умолчанию должен быть выбран пункт "Профиль".
+ - Верстка должна быть реализована в xml.
+ - Верстка должна быть выполнена с учетом "pixel perfect" - когда все элементы дизайна расположены и имеют размеры абсолютно идентичные макету для экрана с теми же размерами, что и макет, и адекватно масштабироваться для других размеров и разрешений.
+ - Все переиспользуемые размеры в xml должны быть вынесены в dimes, цвета в colors, а строки в strings.
+ - Никаких "магических чисел", все должно иметь понятные названия.
+4. Реализовать поведение toolbar-a на экране профиля при скролле, используя CoordinatorLayout.
+ - При прокрутке вниз toolbar вместе с изображением профиля должен постепенно скрываться.
+ - При прокрутке наверх до конца toolbar вместе с изображением профиля должен полностью отображаться.
+ - При полной прокрутке вниз и последующей прокрутке наверх сразу должен отобразиться toolbar без изображения профиля. По мере скролла наверх изображение профиля должно появиться.
+5. Подключить статические анализаторы кода и исправить выявленные замечания
+ - Подключить через gradle [ktlint](https://ktlint.github.io/)
+ - Установить плагин [SonarLint](https://www.sonarlint.org/)
+ - Запустить и исправить выявленные [lint](https://developer.android.com/studio/write/lint) замечания
+ - Запустить и исправить выявленные ktlint замечания
+ - Запустить и исправить выявленные SonarLint замечания
