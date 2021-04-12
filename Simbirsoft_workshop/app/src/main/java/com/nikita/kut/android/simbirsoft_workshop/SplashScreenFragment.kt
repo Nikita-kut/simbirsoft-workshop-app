@@ -10,33 +10,36 @@ import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentSplashScre
 
 class SplashScreenFragment : Fragment() {
 
-    private var _binding: FragmentSplashScreenBinding? = null
-    private val binding: FragmentSplashScreenBinding
-        get() = _binding!!
+    private lateinit var binding: FragmentSplashScreenBinding
+    private val handler = Handler()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
+        binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Handler().postDelayed(
+        handler.postDelayed(
             {
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_container, ProfileFragment())
-                    ?.commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, ProfileFragment())
+                    .commit()
             },
-            2000
+            HANDLER_TIME
         )
     }
 
     override fun onDestroyView() {
-        _binding = null
+        handler.removeCallbacksAndMessages(null)
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val HANDLER_TIME: Long = 2000L
     }
 }
