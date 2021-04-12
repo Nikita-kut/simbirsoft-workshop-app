@@ -25,6 +25,10 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.navigationView.selectedItemId = R.id.item_profile
+
+        binding.ivMan.setOnClickListener {
+            ChangePhotoFragment().show(childFragmentManager, "change photo tag")
+        }
     }
 
     override fun onDestroyView() {
