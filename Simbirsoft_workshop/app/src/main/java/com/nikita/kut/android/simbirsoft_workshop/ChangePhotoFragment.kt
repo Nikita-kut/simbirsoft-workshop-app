@@ -26,10 +26,12 @@ class ChangePhotoFragment : DialogFragment() {
         dialogView.findViewById<LinearLayout>(R.id.take_photo)
             .setOnClickListener {
                 listener.takePhoto()
+                dismiss()
             }
         dialogView.findViewById<LinearLayout>(R.id.delete)
             .setOnClickListener {
                 listener.deletePhoto()
+                dismiss()
             }
         return dialog.create()
     }
