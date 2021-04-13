@@ -19,7 +19,8 @@ class ProfileFragment : Fragment() {
         Friend(Random.nextLong(), R.drawable.avatar_2, R.string.name_2),
         Friend(Random.nextLong(), R.drawable.avatar_3, R.string.name_3),
     )
-    private lateinit var friendAdapter: FriendAdapter
+    private val friendAdapter: FriendAdapter
+        get() = binding.rvListFriends.adapter as FriendAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,9 +38,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initFriendList() {
-        friendAdapter = FriendAdapter()
         with(binding.rvListFriends) {
-            adapter = friendAdapter
+            adapter = FriendAdapter()
             layoutManager = LinearLayoutManager(requireContext())
             // установка максимального количества элементов на одном экране, после которого начинается прокрутка списка
             layoutManager = MaxCountLayoutManager(
