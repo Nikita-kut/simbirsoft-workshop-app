@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">Simbirsoft_workshop</string>
+    <string name="app_name">Хочу помочь</string>
+    <string name="loading">Загрузка</string>
+    <string name="profile">Профиль</string>
+    <string name="edit">Изменить</string>
+    <string name="full_name">Константин Денисов</string>
+    <string name="birthday_data_1">Дата рождения</string>
+    <string name="birthday_data">01 февраля 1980</string>
+    <string name="profession">Хирургия, травмотология</string>
+    <string name="sfera">Сфера деятельности</string>
+    <string name="push">Получать push-уведомления</string>
+    <string name="your_friend">Ваши друзья</string>
+    <string name="name_1">Дмитрий Валерьевич</string>
+    <string name="name_2">Евгений Александров</string>
+    <string name="name_3">Виктор Кузнецов</string>
+    <string name="exit">Выйти из аккаунта</string>
+    <string name="news">Новости</string>
+    <string name="search">Поиск</string>
+    <string name="help">Помочь</string>
+    <string name="history">История</string>
 </resources>
