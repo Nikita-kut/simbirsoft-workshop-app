@@ -1,11 +1,12 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.data.Friend
-import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemFrinedBinding
+import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemFriendBinding
 
 class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -13,7 +14,7 @@ class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_frined, parent, false)
+        val view = inflater.inflate(R.layout.item_friend, parent, false)
         return FriendHolder(view)
     }
 
@@ -33,7 +34,7 @@ class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class FriendHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemFrinedBinding.bind(view)
+        private val binding = ItemFriendBinding.bind(view)
 
         fun bind(friend: Friend) {
             binding.tvName.setText(friend.name)

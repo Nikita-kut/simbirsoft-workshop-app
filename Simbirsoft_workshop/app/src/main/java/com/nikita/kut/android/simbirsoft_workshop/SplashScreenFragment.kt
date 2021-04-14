@@ -27,7 +27,7 @@ class SplashScreenFragment : Fragment() {
         handler.postDelayed(
             {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, ProfileFragment())
+                    .replace(R.id.fragment_container, HelpFragment())
                     .commit()
             },
             HANDLER_TIME

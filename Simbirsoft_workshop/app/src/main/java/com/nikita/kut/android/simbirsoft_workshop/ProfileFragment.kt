@@ -1,6 +1,5 @@
 package com.nikita.kut.android.simbirsoft_workshop
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,6 +13,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nikita.kut.android.simbirsoft_workshop.adapters.FriendAdapter
 import com.nikita.kut.android.simbirsoft_workshop.data.Friend
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentProfileBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.MaxCountLayoutManager
@@ -28,7 +29,9 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
         Friend(Random.nextLong(), R.drawable.avatar_2, R.string.name_2),
         Friend(Random.nextLong(), R.drawable.avatar_3, R.string.name_3),
     )
-    private lateinit var friendAdapter: FriendAdapter
+    private val friendAdapter: FriendAdapter
+        get() = binding.rvListFriends.adapter as FriendAdapter
+
     private val isCameraPermissionGranted: Boolean
         get() {
             return ContextCompat.checkSelfPermission(
@@ -51,6 +54,7 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
         binding.navigationView.selectedItemId = R.id.item_profile
         initFriendList()
         binding.ivMan.setOnClickListener { changePhotoShowDialog() }
+        setBottomNavViewListener()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -63,9 +67,8 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
     }
 
     private fun initFriendList() {
-        friendAdapter = FriendAdapter()
         with(binding.rvListFriends) {
-            adapter = friendAdapter
+            adapter = FriendAdapter()
             layoutManager = LinearLayoutManager(requireContext())
             // установка максимального количества элементов на одном экране, после которого начинается прокрутка списка
             layoutManager = MaxCountLayoutManager(
@@ -73,6 +76,33 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
             ).apply { setMaxCount(3) }
         }
         friendAdapter.updateListFriends(friends)
+    }
+
+    private fun setBottomNavViewListener() {
+        val onNavigateItemSelectListener =
+            BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                return@OnNavigationItemSelectedListener when (item.itemId) {
+                    R.id.item_news -> false
+                    R.id.item_search -> {
+                        openFragment(SearchFragment())
+                        true
+                    }
+                    R.id.item_help -> {
+                        openFragment(HelpFragment())
+                        true
+                    }
+                    R.id.item_history -> false
+                    R.id.item_profile -> false
+                    else -> false
+                }
+            }
+        binding.navigationView.setOnNavigationItemSelectedListener(onNavigateItemSelectListener)
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 
     private fun changePhotoShowDialog() {
