@@ -25,7 +25,7 @@ class HelpFragment : Fragment() {
         HelpCategory(Random.nextLong(), R.drawable.icon_animals, R.string.animals),
         HelpCategory(Random.nextLong(), R.drawable.icon_events, R.string.events)
     )
-
+    
     private val helpCategoryAdapter: HelpCategoryAdapter
         get() = binding.rvCategoryList.adapter as HelpCategoryAdapter
 
