@@ -18,4 +18,23 @@
     <string name="search">Поиск</string>
     <string name="help">Помочь</string>
     <string name="history">История</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="take_photo">Сделать снимок</string>
+    <string name="delete">Удалить</string>
+    <string name="choose_category">Выберите категорию помощи</string>
+    <string name="children">Дети</string>
+    <string name="adult">Взрослые</string>
+    <string name="elderly">Пожилые</string>
+    <string name="animals">Животные</string>
+    <string name="events">Мероприятия</string>
+    <string name="search_hint">Введите название организации</string>
+    <string name="search_result_1">Благотворительный фонд Алины Кабаевой</string>
+    <string name="search_result_2">Во имя жизни</string>
+    <string name="search_result_3">Благотворительный фонд Потанина</string>
+    <string name="search_result_4">Детские домики</string>
+    <string name="search_result_5">Мозаика счастья</string>
+    <string name="key_search">Ключевые слова:</string>
+    <string name="search_result">Результаты поиска:</string>
+    <string name="search_events">По мероприятиям</string>
+    <string name="search_nko">По НКО</string>
 </resources>
