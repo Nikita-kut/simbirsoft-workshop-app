@@ -36,7 +36,7 @@ class HelpCategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(helpCategory: HelpCategory) {
             binding.ivItemHelp.setImageResource(helpCategory.drawableRes)
-            binding.tvItemHelp.setText(helpCategory.category)
+            binding.tvItemHelp.text = helpCategory.category
         }
     }
 }

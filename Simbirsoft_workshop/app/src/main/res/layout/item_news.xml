@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_margin="4dp"
+        android:id="@+id/iv_news_picture"
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_fade"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fade"
+        app:layout_constraintBottom_toBottomOf="@id/iv_news_picture"
+        app:layout_constraintEnd_toEndOf="@id/iv_news_picture"
+        app:layout_constraintStart_toStartOf="@id/iv_news_picture"
+        app:layout_constraintTop_toTopOf="@id/iv_news_picture" />
+
+    <TextView
+        android:id="@+id/tv_news_title"
+        style="@style/TextStyle.BlueGrey.21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:textFontWeight="800"
+        app:layout_constraintBottom_toTopOf="@id/iv_decor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_fade"
+        tools:text="@tools:sample/full_names" />
+
+    <ImageView
+        android:id="@+id/iv_decor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/decor"
+        app:layout_constraintBottom_toTopOf="@id/tv_body_news"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_news_title" />
+
+    <TextView
+        android:id="@+id/tv_body_news"
+        style="@style/TextStyle.Black70.14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_decor"
+        tools:text="@tools:sample/full_names" />
+
+    <ImageView
+        android:id="@+id/color_bottom_background"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/leaf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_body_news" />
+
+    <ImageView
+        android:id="@+id/iv_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/color_bottom_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/color_bottom_background" />
+
+    <TextView
+        android:id="@+id/tv_news_date"
+        style="@style/TextStyle.Black38.12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="25dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/color_bottom_background"
+        app:layout_constraintStart_toEndOf="@id/iv_calendar"
+        app:layout_constraintTop_toTopOf="@id/color_bottom_background"
+        tools:text="@tools:sample/date/mmddyy" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

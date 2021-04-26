@@ -37,4 +37,7 @@
     <string name="search_result">Результаты поиска:</string>
     <string name="search_events">По мероприятиям</string>
     <string name="search_nko">По НКО</string>
+    <string name="filter">Фильтр</string>
+    <string name="help_categories_title">Категории помощи</string>
+    <string name="share">Поделиться</string>
 </resources>

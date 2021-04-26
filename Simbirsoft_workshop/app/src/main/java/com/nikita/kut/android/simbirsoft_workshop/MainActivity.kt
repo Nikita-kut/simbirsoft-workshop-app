@@ -14,8 +14,22 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(binding.fragmentContainer.id, SplashScreenFragment())
+                .replace(
+                    binding.fragmentContainer.id,
+                    MainFragment(), MainFragment.MAIN_FRAGMENT_TAG
+                )
                 .commit()
         }
     }
+
+    override fun onBackPressed() {
+        val backStackCount =
+            supportFragmentManager.findFragmentByTag(MainFragment.MAIN_FRAGMENT_TAG)?.childFragmentManager?.backStackEntryCount
+        if (backStackCount == 0) {
+            super.onBackPressed()
+        } else {
+            supportFragmentManager.findFragmentByTag(MainFragment.MAIN_FRAGMENT_TAG)?.childFragmentManager?.popBackStack()
+        }
+    }
+
 }

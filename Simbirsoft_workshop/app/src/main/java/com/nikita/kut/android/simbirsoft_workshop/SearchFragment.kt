@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nikita.kut.android.simbirsoft_workshop.adapters.ViewPagerAdapter
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentSearchBinding
+import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 
 class SearchFragment : Fragment() {
 
@@ -53,15 +54,18 @@ class SearchFragment : Fragment() {
         val onNavigateItemSelectListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 return@OnNavigationItemSelectedListener when (item.itemId) {
-                    R.id.item_news -> false
+                    R.id.item_news -> {
+                        NewsFragment().openFragment(requireActivity())
+                        true
+                    }
                     R.id.item_search -> false
                     R.id.item_help -> {
-                        openFragment(HelpFragment())
+                        HelpFragment().openFragment(requireActivity())
                         true
                     }
                     R.id.item_history -> false
                     R.id.item_profile -> {
-                        openFragment(ProfileFragment())
+                        ProfileFragment().openFragment(requireActivity())
                         true
                     }
                     else -> false
@@ -70,9 +74,4 @@ class SearchFragment : Fragment() {
         binding.bnvSearch.setOnNavigationItemSelectedListener(onNavigateItemSelectListener)
     }
 
-    private fun openFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-    }
 }
