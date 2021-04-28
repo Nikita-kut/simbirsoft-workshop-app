@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikita.kut.android.simbirsoft_workshop.adapters.SearchResultAdapter
 import com.nikita.kut.android.simbirsoft_workshop.data.SearchResult
 import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemViewPagerBinding
-import com.nikita.kut.android.simbirsoft_workshop.util.MaxCountLayoutManager
 import kotlin.random.Random
 
 class ItemViewPagerFragment : Fragment() {
@@ -45,9 +44,6 @@ class ItemViewPagerFragment : Fragment() {
         with(binding.rvSearchResult) {
             adapter = SearchResultAdapter()
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//            layoutManager = MaxCountLayoutManager(
-//                requireContext()
-//            ).apply { setMaxCount(5) }
         }
         searchResultAdapter.updateSearchResults(searchResults)
     }

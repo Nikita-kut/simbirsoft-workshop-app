@@ -1,16 +1,19 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
+import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.HelpCategoryDiffUtilCallBack
+import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.NewsDiffUtilCallback
+import com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders.HelpCategoryHolder
 import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
-import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemHelpBinding
 
 class HelpCategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var categories: ArrayList<HelpCategory> = arrayListOf()
+    private val differ = AsyncListDiffer(this, HelpCategoryDiffUtilCallBack())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,23 +23,14 @@ class HelpCategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is HelpCategoryHolder) {
-            val category = categories[position]
+            val category = differ.currentList[position]
             holder.bind(category)
         }
     }
 
-    override fun getItemCount(): Int = categories.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     fun updateCategories(newCategories: ArrayList<HelpCategory>) {
-        categories = newCategories
-    }
-
-    class HelpCategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemHelpBinding.bind(view)
-
-        fun bind(helpCategory: HelpCategory) {
-            binding.ivItemHelp.setImageResource(helpCategory.drawableRes)
-            binding.tvItemHelp.setText(helpCategory.category)
-        }
+        differ.submitList(newCategories)
     }
 }

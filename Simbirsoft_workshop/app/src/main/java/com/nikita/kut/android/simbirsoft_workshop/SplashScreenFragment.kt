@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentSplashScreenBinding
+import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 
 class SplashScreenFragment : Fragment() {
 
@@ -26,9 +27,7 @@ class SplashScreenFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         handler.postDelayed(
             {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, HelpFragment())
-                    .commit()
+                HelpFragment().openFragment(requireActivity())
             },
             HANDLER_TIME
         )

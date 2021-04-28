@@ -21,6 +21,7 @@ class ChangePhotoFragment : DialogFragment() {
         val dialog = AlertDialog.Builder(context).setView(dialogView)
         dialogView.findViewById<LinearLayout>(R.id.choose_photo)
             .setOnClickListener {
+                listener.pickPictureFromGallery()
                 dismiss()
             }
         dialogView.findViewById<LinearLayout>(R.id.take_photo)
@@ -37,6 +38,7 @@ class ChangePhotoFragment : DialogFragment() {
     }
 
     interface ChangePhotoClickListener {
+        fun pickPictureFromGallery()
         fun takePhoto()
         fun deletePhoto()
     }

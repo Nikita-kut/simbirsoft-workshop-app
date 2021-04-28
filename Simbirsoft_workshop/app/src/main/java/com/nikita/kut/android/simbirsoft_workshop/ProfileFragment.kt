@@ -40,6 +40,14 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
             ) == PackageManager.PERMISSION_GRANTED
         }
 
+    private val isGalleryPermissionGranted: Boolean
+        get() {
+            return ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,9 +66,16 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null && TAKE_OR_PICK == 1) {
-            val photo = data.getParcelableExtra("data") as? Bitmap
-            binding.ivMan.setImageBitmap(photo)
+        if (resultCode == Activity.RESULT_OK && data != null && TAKE_OR_PICK == 1) {
+            when (requestCode) {
+                TAKE_PHOTO_REQUEST_CODE -> {
+                    val photo = data.getParcelableExtra("data") as? Bitmap
+                    binding.ivMan.setImageBitmap(photo)
+                }
+                PICK_PHOTO_REQUEST_CODE -> {
+                    binding.ivMan.setImageURI(data.data)
+                }
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
@@ -82,7 +97,10 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
         val onNavigateItemSelectListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 return@OnNavigationItemSelectedListener when (item.itemId) {
-                    R.id.item_news -> false
+                    R.id.item_news -> {
+                        openFragment(NewsFragment())
+                        true
+                    }
                     R.id.item_search -> {
                         openFragment(SearchFragment())
                         true
@@ -109,17 +127,30 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
         ChangePhotoFragment().show(childFragmentManager, CHANGE_PHOTO_TAG)
     }
 
+    override fun pickPictureFromGallery() {
+        if (!isGalleryPermissionGranted) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PICK_PHOTO_REQUEST_CODE
+            )
+        } else {
+            val pickGalleryPicture = Intent(Intent.ACTION_PICK)
+            pickGalleryPicture.type = "image/*"
+            startActivityForResult(pickGalleryPicture, PICK_PHOTO_REQUEST_CODE)
+        }
+    }
+
     override fun takePhoto() {
         if (!isCameraPermissionGranted) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(android.Manifest.permission.CAMERA),
-                PHOTO_REQUEST_CODE
+                TAKE_PHOTO_REQUEST_CODE
             )
         } else {
             val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             takePhotoIntent.resolveActivity(requireActivity().packageManager).also {
-                startActivityForResult(takePhotoIntent, PHOTO_REQUEST_CODE)
+                startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST_CODE)
             }
         }
     }
@@ -130,7 +161,8 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
 
     companion object {
         const val CHANGE_PHOTO_TAG = "change_photo_tag"
-        const val PHOTO_REQUEST_CODE = 123
+        const val TAKE_PHOTO_REQUEST_CODE = 123
+        const val PICK_PHOTO_REQUEST_CODE = 321
         const val TAKE_OR_PICK = 1
     }
 }
