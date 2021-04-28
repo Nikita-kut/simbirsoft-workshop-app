@@ -14,7 +14,13 @@ class NewsHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListen
 
     fun bind(news: News, newsListener: NewsAdapter.OnNewsClickListener) {
         Glide.with(itemView)
-            .load(Uri.parse(news.newsPicture))
+            .load(
+                itemView.resources.getIdentifier(
+                    news.newsPicture,
+                    "drawable",
+                    itemView.context.packageName
+                )
+            )
             .into(binding.ivNewsPicture)
         binding.tvNewsTitle.text = news.newsTitle
         binding.tvBodyNews.text = news.newsBody

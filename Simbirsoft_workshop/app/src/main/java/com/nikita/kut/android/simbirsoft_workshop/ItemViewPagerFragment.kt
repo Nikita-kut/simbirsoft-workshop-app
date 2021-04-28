@@ -44,9 +44,6 @@ class ItemViewPagerFragment : Fragment() {
         with(binding.rvSearchResult) {
             adapter = SearchResultAdapter()
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//            layoutManager = MaxCountLayoutManager(
-//                requireContext()
-//            ).apply { setMaxCount(5) }
         }
         searchResultAdapter.updateSearchResults(searchResults)
     }

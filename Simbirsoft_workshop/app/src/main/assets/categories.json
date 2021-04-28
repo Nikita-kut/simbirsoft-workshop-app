@@ -2,27 +2,27 @@
     {
       "id": 1,
       "name": "Дети",
-      "image": "https://drive.google.com/file/d/13vlc32wDw8Wpbry8ryvd0WYv8VwsUKDj/view?usp=sharing"
+      "image": "icon_kids"
 
     },
     {
       "id": 2,
       "name": "Взрослые",
-      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
+      "image": "icon_adult"
     },
     {
       "id": 3,
       "name": "Пожилые",
-      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
+      "image": "icon_elderly"
     },
     {
       "id": 4,
       "name": "Животные",
-      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
+      "image": "icon_animals"
     },
     {
       "id": 5,
       "name": "Мероприятия",
-      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
+      "image": "icon_events"
     }
   ]

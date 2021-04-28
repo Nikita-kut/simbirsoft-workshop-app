@@ -3,6 +3,7 @@ package com.nikita.kut.android.simbirsoft_workshop.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.NewsDiffUtilCallback

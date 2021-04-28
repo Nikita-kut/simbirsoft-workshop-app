@@ -27,13 +27,13 @@ class NewsItemFragment : Fragment() {
 
     private val defaultNews by lazy {
         News(
-        id = Random.nextLong(),
-        newsPicture = "R.drawable.ic_no_photo",
-        newsTitle = resources.getString(R.string.animals),
-        newsBody = resources.getString(R.string.delete),
-        newsDate = resources.getString(R.string.delete),
-        categoriesOfHelp = arrayListOf()
-    )
+            id = Random.nextLong(),
+            newsPicture = "R.drawable.ic_no_photo",
+            newsTitle = resources.getString(R.string.animals),
+            newsBody = resources.getString(R.string.delete),
+            newsDate = resources.getString(R.string.delete),
+            categoriesOfHelp = arrayListOf()
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,7 +48,13 @@ class NewsItemFragment : Fragment() {
         binding.tvNewsItemTitle.text = news.newsTitle
         binding.tvNewsItemDate.text = news.newsDate
         Glide.with(requireActivity())
-            .load(Uri.parse(news.newsPicture))
+            .load(
+                requireActivity().resources.getIdentifier(
+                    news.newsPicture,
+                    "drawable",
+                    requireContext().packageName
+                )
+            )
             .into(binding.picture1)
         binding.tvNewsItemBody.text = news.newsBody
     }

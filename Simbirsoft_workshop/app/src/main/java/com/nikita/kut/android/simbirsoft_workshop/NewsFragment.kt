@@ -26,11 +26,11 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
     private val newsAdapter: NewsAdapter
         get() = binding.rvListNews.adapter as NewsAdapter
 
-    private val news = arrayListOf<News>()
+    private var news = arrayListOf<News>()
 
     private var newNews = news
 
-    private var keyList = listOf<CategoriesOfHelp?>()
+    private var keyList = listOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,13 +41,9 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        convertNewsJsonToInstance()
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        convertNewsJsonToInstance()
         binding.bnvNews.selectedItemId = R.id.item_news
         SharedPreferenceModel.with(requireActivity().application)
         setBottomNavViewListener()
@@ -64,9 +60,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         val adapter = moshi.adapter<List<News>>(listType)
 
         val newsFromJson = adapter.fromJson(newsJSONString)
-        for (i in newsFromJson!!.indices) {
-            news.add(newsFromJson[i])
-        }
+        news = newsFromJson as ArrayList<News>
     }
 
     private fun setBottomNavViewListener() {
@@ -119,17 +113,17 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         }
     }
 
-    private fun getCategoriesList(): List<CategoriesOfHelp?> {
+    private fun getCategoriesList(): List<String> {
         val children =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_CHILDREN)
+            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_CHILDREN).toString()
         val adult =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ADULT)
+            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ADULT).toString()
         val elderly =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ELDERLY)
+            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ELDERLY).toString()
         val animals =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ANIMALS)
+            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ANIMALS).toString()
         val events =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_EVENTS)
+            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_EVENTS).toString()
         return listOf(children, adult, elderly, animals, events)
     }
 

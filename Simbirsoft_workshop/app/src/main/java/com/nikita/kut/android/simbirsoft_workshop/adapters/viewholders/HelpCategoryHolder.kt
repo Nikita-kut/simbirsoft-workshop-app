@@ -1,6 +1,5 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders
 
-import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,7 +11,13 @@ class HelpCategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(helpCategory: HelpCategory) {
         Glide.with(itemView)
-            .load(Uri.parse(helpCategory.drawableRes))
+            .load(
+                itemView.resources.getIdentifier(
+                    helpCategory.drawableRes,
+                    "drawable",
+                    itemView.context.packageName
+                )
+            )
             .into(binding.ivItemHelp)
         binding.tvItemHelp.text = helpCategory.category
     }

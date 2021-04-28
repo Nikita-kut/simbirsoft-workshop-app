@@ -3,9 +3,11 @@ package com.nikita.kut.android.simbirsoft_workshop.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.HelpCategoryDiffUtilCallBack
+import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.NewsDiffUtilCallback
 import com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders.HelpCategoryHolder
 import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
 
