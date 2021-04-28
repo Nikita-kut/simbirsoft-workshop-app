@@ -1,29 +1,28 @@
-{
-  "categories":[
+[
     {
       "id": 1,
       "name": "Дети",
-      "image": "icon_kids"
+      "image": "https://drive.google.com/file/d/13vlc32wDw8Wpbry8ryvd0WYv8VwsUKDj/view?usp=sharing"
+
     },
     {
       "id": 2,
       "name": "Взрослые",
-      "image": "icon_adult"
+      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
     },
     {
       "id": 3,
       "name": "Пожилые",
-      "image": "icon_elderly"
+      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
     },
     {
       "id": 4,
       "name": "Животные",
-      "image": "icon_animals"
+      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
     },
     {
       "id": 5,
       "name": "Мероприятия",
-      "image": "icon_events"
+      "image": "Simbirsoft_workshop/app/src/main/res/drawable-hdpi/icon_adult.png"
     }
   ]
-}

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentMainBinding
-import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentSplashScreenBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 
 class MainFragment: Fragment() {

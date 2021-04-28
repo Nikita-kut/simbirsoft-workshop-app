@@ -11,7 +11,6 @@ import com.nikita.kut.android.simbirsoft_workshop.data.CategoriesOfHelp
 import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentFilterBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
-import java.io.InputStream
 
 class FilterFragment : Fragment() {
 

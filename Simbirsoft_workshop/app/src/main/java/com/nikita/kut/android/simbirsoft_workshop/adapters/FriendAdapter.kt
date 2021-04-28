@@ -1,16 +1,18 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
+import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.FriendDiffUtilCallback
+import com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders.FriendHolder
 import com.nikita.kut.android.simbirsoft_workshop.data.Friend
-import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemFriendBinding
 
 class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var friends: ArrayList<Friend> = arrayListOf()
+
+    private val differ = AsyncListDiffer(this, FriendDiffUtilCallback())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,27 +22,17 @@ class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is FriendHolder) {
-            val friend = friends[position]
+            val friend = differ.currentList[position]
             holder.bind(friend)
         }
 
     }
 
-    override fun getItemCount(): Int = friends.size
+    override fun getItemCount(): Int = differ.currentList.size
 
 
     fun updateListFriends(newListFriends: ArrayList<Friend>) {
-        friends = newListFriends
+        differ.submitList(newListFriends)
     }
-
-    class FriendHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemFriendBinding.bind(view)
-
-        fun bind(friend: Friend) {
-            binding.tvName.setText(friend.name)
-            binding.avatar.setImageResource(friend.drawableRes)
-        }
-    }
-
 
 }

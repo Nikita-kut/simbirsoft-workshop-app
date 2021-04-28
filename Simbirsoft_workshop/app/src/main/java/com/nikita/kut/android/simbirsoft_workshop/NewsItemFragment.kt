@@ -1,10 +1,12 @@
 package com.nikita.kut.android.simbirsoft_workshop
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.nikita.kut.android.simbirsoft_workshop.data.News
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentNewsItemBinding
 import kotlin.random.Random
@@ -26,7 +28,7 @@ class NewsItemFragment : Fragment() {
     private val defaultNews by lazy {
         News(
         id = Random.nextLong(),
-        newsPicture = R.drawable.ic_no_photo,
+        newsPicture = "R.drawable.ic_no_photo",
         newsTitle = resources.getString(R.string.animals),
         newsBody = resources.getString(R.string.delete),
         newsDate = resources.getString(R.string.delete),
@@ -45,7 +47,9 @@ class NewsItemFragment : Fragment() {
         binding.tvTitleItemNews.text = news.newsTitle
         binding.tvNewsItemTitle.text = news.newsTitle
         binding.tvNewsItemDate.text = news.newsDate
-        binding.picture1.setImageResource(news.newsPicture)
+        Glide.with(requireActivity())
+            .load(Uri.parse(news.newsPicture))
+            .into(binding.picture1)
         binding.tvNewsItemBody.text = news.newsBody
     }
 

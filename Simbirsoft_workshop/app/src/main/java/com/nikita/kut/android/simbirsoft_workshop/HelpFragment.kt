@@ -11,10 +11,11 @@ import com.nikita.kut.android.simbirsoft_workshop.adapters.HelpCategoryAdapter
 import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentHelpBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.ItemOffsetDecoration
+import com.nikita.kut.android.simbirsoft_workshop.util.getJSONFromAssets
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import java.util.*
 
 class HelpFragment : Fragment() {
 
@@ -34,52 +35,29 @@ class HelpFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        convertHelpCategoryJsonToInstance()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setCategoriesListFromJson()
         binding.bnvHelp.selectedItemId = R.id.item_help
         initCategoryList()
         setBottomNavViewListener()
     }
 
-    private fun setCategoriesListFromJson() {
-        try {
-            val obj = JSONObject(getJSONFromAssets()!!)
-            val categoriesArray = obj.getJSONArray("categories")
+    private fun convertHelpCategoryJsonToInstance() {
+        val helpJSONString = getJSONFromAssets(requireActivity(), "categories.json")
+        val moshi = Moshi.Builder().build()
 
-            for (i in 0 until categoriesArray.length()) {
-                val category = categoriesArray.getJSONObject(i)
-                val id = category.getInt("id")
-                val categoryName = category.getString("name")
-                val imageResId = resources.getIdentifier(
-                    category.getString("image"),
-                    "drawable",
-                    requireContext().packageName
-                )
-                val categoryForAdd = HelpCategory(id.toLong(), imageResId, categoryName)
-                categories.add(categoryForAdd)
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
+        val listType = Types.newParameterizedType(List::class.java, HelpCategory::class.java)
+        val adapter = moshi.adapter<List<HelpCategory>>(listType)
+
+        val listCategory = adapter.fromJson(helpJSONString)
+        for (i in listCategory!!.indices) {
+            categories.add(listCategory[i])
         }
-    }
-
-
-    private fun getJSONFromAssets(): String? {
-        var json: String? = null
-        val charset = Charsets.UTF_8
-        try {
-            val myUserJSONFile = requireActivity().assets.open("categories.json")
-            val size = myUserJSONFile.available()
-            val buffer = ByteArray(size)
-            myUserJSONFile.read(buffer)
-            myUserJSONFile.close()
-            json = String(buffer, charset)
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-            return null
-        }
-        return json
     }
 
     private fun initCategoryList() {

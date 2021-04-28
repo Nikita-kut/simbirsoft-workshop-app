@@ -1,12 +1,13 @@
 package com.nikita.kut.android.simbirsoft_workshop.data
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class HelpCategory(
     val id: Long,
-    @DrawableRes val drawableRes: Int,
-    val category: String
+    @Json(name = "name") val category: String,
+    @Json(name = "image") val drawableRes: String
 )
 
 enum class CategoriesOfHelp {
