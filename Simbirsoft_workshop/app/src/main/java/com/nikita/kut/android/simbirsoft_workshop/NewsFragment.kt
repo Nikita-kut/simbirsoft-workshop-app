@@ -1,6 +1,9 @@
 package com.nikita.kut.android.simbirsoft_workshop
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +21,10 @@ import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragmentWithAddBackStack
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListener {
 
@@ -32,6 +39,8 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
 
     private var keyList = listOf<String>()
 
+    private val newsScope = CoroutineScope(Dispatchers.Default)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +52,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        convertNewsJsonToInstance()
+        coroutineStart()
         binding.bnvNews.selectedItemId = R.id.item_news
         SharedPreferenceModel.with(requireActivity().application)
         setBottomNavViewListener()
@@ -52,7 +61,21 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         onCheckClick()
     }
 
-    private fun convertNewsJsonToInstance() {
+    private fun coroutineStart() {
+        newsScope.launch {
+            Log.d(TAG, "Coroutine inside from thread = ${Thread.currentThread().name}")
+            news = convertNewsJsonToInstance()
+        }
+        Log.d(TAG, "Coroutine launched from thread = ${Thread.currentThread().name}")
+        Handler().postDelayed({
+            Log.d(TAG, "App from thread = ${Thread.currentThread().name}")
+            Thread.sleep(SLEEP_TIME)
+            binding.progressBarNews.visibility = View.GONE
+            Log.d(TAG, "App from thread = ${Thread.currentThread().name}")
+        }, 0)
+    }
+
+    private fun convertNewsJsonToInstance(): ArrayList<News> {
         val newsJSONString = getJSONFromAssets(requireActivity(), "news.json")
         val moshi = Moshi.Builder().build()
 
@@ -60,7 +83,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         val adapter = moshi.adapter<List<News>>(listType)
 
         val newsFromJson = adapter.fromJson(newsJSONString)
-        news = newsFromJson as ArrayList<News>
+        return newsFromJson as ArrayList<News>
     }
 
     private fun setBottomNavViewListener() {
@@ -140,5 +163,10 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
     override fun onNewsClick(position: Int) {
         NewsItemFragment.newInstanceWithArgs(newNews[position])
             .openFragmentWithAddBackStack(requireActivity())
+    }
+
+    companion object {
+        private const val TAG = "news_fragment"
+        private const val SLEEP_TIME = 5000L
     }
 }

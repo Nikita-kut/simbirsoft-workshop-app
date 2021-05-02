@@ -163,8 +163,7 @@ class FilterFragment : Fragment() {
                 }
             }
             setNavigationOnClickListener {
-                requireFragmentManager()
-                    .popBackStack()
+                requireFragmentManager().popBackStack()
             }
         }
     }
