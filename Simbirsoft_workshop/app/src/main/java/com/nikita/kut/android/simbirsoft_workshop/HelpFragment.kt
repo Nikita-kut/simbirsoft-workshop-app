@@ -15,6 +15,10 @@ import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentHelpBindin
 import com.nikita.kut.android.simbirsoft_workshop.util.ItemOffsetDecoration
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.viewmodel.HelpViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class HelpFragment : Fragment() {
@@ -26,6 +30,8 @@ class HelpFragment : Fragment() {
 
     private val helpViewModel: HelpViewModel by activityViewModels()
 
+    private val categoriesScope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,8 +41,8 @@ class HelpFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadImitation()
         binding.bnvHelp.selectedItemId = R.id.item_help
         initCategoryList()
@@ -44,19 +50,12 @@ class HelpFragment : Fragment() {
     }
 
     private fun loadImitation() {
-        helpViewModel.initCategoriesListFromDatabase()
-        Handler().postDelayed({
-            Log.d(
-                HelpViewModel.TAG_HELP_FRAGMENT,
-                "Thread = ${Thread.currentThread().name}"
-            )
+        categoriesScope.launch {
+            helpViewModel.initCategoriesListFromDatabase()
             Thread.sleep(HelpViewModel.SLEEP_TIME)
-            Log.d(
-                HelpViewModel.TAG_HELP_FRAGMENT,
-                "Thread = ${Thread.currentThread().name}"
-            )
             binding.progressBarHelp.visibility = View.GONE
-        }, 0)
+
+        }
     }
 
     private fun initCategoryList() {

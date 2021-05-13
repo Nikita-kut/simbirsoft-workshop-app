@@ -1,38 +1,25 @@
 package com.nikita.kut.android.simbirsoft_workshop.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HelpViewModel : ViewModel() {
 
     var categories = arrayListOf<HelpCategory>()
-
-    private val categoriesScope = CoroutineScope(Dispatchers.Default)
 
     private val database = FirebaseDatabase.getInstance().reference.child(CATEGORIES_DB_TAG)
 
     fun initCategoriesListFromDatabase() {
         database.addValueEventListener(
             object : ValueEventListener {
-
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(CATEGORIES_DB_TAG)) {
-                        categoriesScope.launch {
-                            Log.d(
-                                TAG_HELP_FRAGMENT,
-                                "Coroutine inside from thread = ${Thread.currentThread().name}"
-                            )
-                            val memberList = snapshot.child(CATEGORIES_DB_TAG).value as ArrayList<*>
-                            categories = getHelpCategoryList(memberList)
-                        }
+                        val memberList = snapshot.child(CATEGORIES_DB_TAG).value as ArrayList<*>
+                        categories = getHelpCategoryList(memberList)
                     }
                 }
 
