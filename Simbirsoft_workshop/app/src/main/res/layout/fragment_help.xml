@@ -57,6 +57,18 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_help" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:theme="@style/CircularProgress"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_category" />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_help"
         android:layout_width="match_parent"

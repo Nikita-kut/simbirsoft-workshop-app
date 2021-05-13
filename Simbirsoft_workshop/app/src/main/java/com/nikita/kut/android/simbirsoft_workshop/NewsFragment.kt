@@ -1,30 +1,23 @@
 package com.nikita.kut.android.simbirsoft_workshop
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter.OnNewsClickListener
-import com.nikita.kut.android.simbirsoft_workshop.data.CategoriesOfHelp
 import com.nikita.kut.android.simbirsoft_workshop.data.News
 import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentNewsBinding
-import com.nikita.kut.android.simbirsoft_workshop.util.getJSONFromAssets
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragmentWithAddBackStack
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.nikita.kut.android.simbirsoft_workshop.viewmodel.NewsViewModel
+import com.nikita.kut.android.simbirsoft_workshop.viewmodel.NewsViewModel.Companion.SLEEP_TIME
 
 class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListener {
 
@@ -33,13 +26,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
     private val newsAdapter: NewsAdapter
         get() = binding.rvListNews.adapter as NewsAdapter
 
-    private var news = arrayListOf<News>()
-
-    private var newNews = news
-
-    private var keyList = listOf<String>()
-
-    private val newsScope = CoroutineScope(Dispatchers.Default)
+    private val newsViewModel: NewsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +39,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        coroutineStart()
+        loadImitation()
         binding.bnvNews.selectedItemId = R.id.item_news
         SharedPreferenceModel.with(requireActivity().application)
         setBottomNavViewListener()
@@ -61,29 +48,12 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         onCheckClick()
     }
 
-    private fun coroutineStart() {
-        newsScope.launch {
-            Log.d(TAG, "Coroutine inside from thread = ${Thread.currentThread().name}")
-            news = convertNewsJsonToInstance()
-        }
-        Log.d(TAG, "Coroutine launched from thread = ${Thread.currentThread().name}")
+    private fun loadImitation() {
+        newsViewModel.initNewsFromDatabase()
         Handler().postDelayed({
-            Log.d(TAG, "App from thread = ${Thread.currentThread().name}")
             Thread.sleep(SLEEP_TIME)
             binding.progressBarNews.visibility = View.GONE
-            Log.d(TAG, "App from thread = ${Thread.currentThread().name}")
         }, 0)
-    }
-
-    private fun convertNewsJsonToInstance(): ArrayList<News> {
-        val newsJSONString = getJSONFromAssets(requireActivity(), "news.json")
-        val moshi = Moshi.Builder().build()
-
-        val listType = Types.newParameterizedType(List::class.java, News::class.java)
-        val adapter = moshi.adapter<List<News>>(listType)
-
-        val newsFromJson = adapter.fromJson(newsJSONString)
-        return newsFromJson as ArrayList<News>
     }
 
     private fun setBottomNavViewListener() {
@@ -121,7 +91,7 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
                     false
                 )
         }
-        newsAdapter.updateNewsList(news)
+        newsAdapter.updateNewsList(newsViewModel.newsList)
     }
 
     private fun setMenu() {
@@ -136,37 +106,17 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         }
     }
 
-    private fun getCategoriesList(): List<String> {
-        val children =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_CHILDREN).toString()
-        val adult =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ADULT).toString()
-        val elderly =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ELDERLY).toString()
-        val animals =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_ANIMALS).toString()
-        val events =
-            SharedPreferenceModel.get<CategoriesOfHelp>(FilterFragment.KEY_EVENTS).toString()
-        return listOf(children, adult, elderly, animals, events)
-    }
-
     override fun onCheckClick() {
-        keyList = getCategoriesList()
-        newNews = news.filter { news ->
+        newsViewModel.newsFilteredList = newsViewModel.newsList.filter { news ->
             news.categoriesOfHelp.map { category -> category.name }
-                .intersect(keyList.toSet())
+                .intersect(newsViewModel.getCategoriesList().toSet())
                 .isNotEmpty()
         } as ArrayList<News>
-        newsAdapter.updateNewsList(newNews)
+        newsAdapter.updateNewsList(newsViewModel.newsFilteredList)
     }
 
     override fun onNewsClick(position: Int) {
-        NewsItemFragment.newInstanceWithArgs(newNews[position])
+        NewsItemFragment.newInstanceWithArgs(newsViewModel.newsFilteredList[position])
             .openFragmentWithAddBackStack(requireActivity())
-    }
-
-    companion object {
-        private const val TAG = "news_fragment"
-        private const val SLEEP_TIME = 5000L
     }
 }

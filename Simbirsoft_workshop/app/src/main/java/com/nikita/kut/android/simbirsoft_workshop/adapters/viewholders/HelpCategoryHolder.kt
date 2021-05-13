@@ -12,11 +12,7 @@ class HelpCategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(helpCategory: HelpCategory) {
         Glide.with(itemView)
             .load(
-                itemView.resources.getIdentifier(
-                    helpCategory.drawableRes,
-                    "drawable",
-                    itemView.context.packageName
-                )
+                helpCategory.drawableRes
             )
             .into(binding.ivItemHelp)
         binding.tvItemHelp.text = helpCategory.category

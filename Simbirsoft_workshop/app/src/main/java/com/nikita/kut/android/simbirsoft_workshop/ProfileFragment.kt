@@ -12,25 +12,26 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nikita.kut.android.simbirsoft_workshop.adapters.FriendAdapter
 import com.nikita.kut.android.simbirsoft_workshop.data.Friend
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentProfileBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.MaxCountLayoutManager
+import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
+import com.nikita.kut.android.simbirsoft_workshop.viewmodel.ProfileViewModel
 import kotlin.random.Random
-
 
 class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener {
 
     private lateinit var binding: FragmentProfileBinding
-    private val friends = arrayListOf(
-        Friend(Random.nextLong(), R.drawable.avatar_1, R.string.name_1),
-        Friend(Random.nextLong(), R.drawable.avatar_2, R.string.name_2),
-        Friend(Random.nextLong(), R.drawable.avatar_3, R.string.name_3),
-    )
+
     private val friendAdapter: FriendAdapter
         get() = binding.rvListFriends.adapter as FriendAdapter
+
+    private val profileViewModel: ProfileViewModel by activityViewModels()
 
     private val isCameraPermissionGranted: Boolean
         get() {
@@ -57,8 +58,8 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.navigationView.selectedItemId = R.id.item_profile
         initFriendList()
         binding.ivMan.setOnClickListener { changePhotoShowDialog() }
@@ -90,7 +91,7 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
                 requireContext()
             ).apply { setMaxCount(3) }
         }
-        friendAdapter.updateListFriends(friends)
+        friendAdapter.updateListFriends(profileViewModel.friendList)
     }
 
     private fun setBottomNavViewListener() {
@@ -98,15 +99,15 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 return@OnNavigationItemSelectedListener when (item.itemId) {
                     R.id.item_news -> {
-                        openFragment(NewsFragment())
+                        NewsFragment().openFragment(requireActivity())
                         true
                     }
                     R.id.item_search -> {
-                        openFragment(SearchFragment())
+                        SearchFragment().openFragment(requireActivity())
                         true
                     }
                     R.id.item_help -> {
-                        openFragment(HelpFragment())
+                        HelpFragment().openFragment(requireActivity())
                         true
                     }
                     R.id.item_history -> false
@@ -115,12 +116,6 @@ class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener
                 }
             }
         binding.navigationView.setOnNavigationItemSelectedListener(onNavigateItemSelectListener)
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
     }
 
     private fun changePhotoShowDialog() {
