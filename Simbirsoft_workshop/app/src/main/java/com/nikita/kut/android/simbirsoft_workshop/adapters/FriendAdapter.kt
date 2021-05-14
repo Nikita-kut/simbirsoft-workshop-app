@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.FriendDiffUtilCallback
 import com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders.FriendHolder
-import com.nikita.kut.android.simbirsoft_workshop.data.Friend
+import com.nikita.kut.android.simbirsoft_workshop.model.Friend
 
 class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

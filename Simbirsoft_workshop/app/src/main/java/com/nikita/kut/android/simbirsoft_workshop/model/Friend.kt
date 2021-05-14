@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop.data
+package com.nikita.kut.android.simbirsoft_workshop.model
 
 import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes

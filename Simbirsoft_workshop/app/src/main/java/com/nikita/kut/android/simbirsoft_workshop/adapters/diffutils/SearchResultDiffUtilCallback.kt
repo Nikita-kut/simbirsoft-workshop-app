@@ -1,7 +1,7 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nikita.kut.android.simbirsoft_workshop.data.SearchResult
+import com.nikita.kut.android.simbirsoft_workshop.model.SearchResult
 
 class SearchResultDiffUtilCallback : DiffUtil.ItemCallback<SearchResult>() {
 

@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter.OnNewsClickListener
-import com.nikita.kut.android.simbirsoft_workshop.data.News
-import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
+import com.nikita.kut.android.simbirsoft_workshop.model.News
+import com.nikita.kut.android.simbirsoft_workshop.util.SharedPreferenceModel
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentNewsBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragmentWithAddBackStack

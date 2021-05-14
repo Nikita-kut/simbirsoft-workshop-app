@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils.SearchResultDiffUtilCallback
 import com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders.SearchResultViewHolder
-import com.nikita.kut.android.simbirsoft_workshop.data.SearchResult
+import com.nikita.kut.android.simbirsoft_workshop.model.SearchResult
 
 class SearchResultAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

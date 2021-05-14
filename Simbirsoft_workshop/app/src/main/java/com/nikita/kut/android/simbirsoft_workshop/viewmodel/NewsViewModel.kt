@@ -1,17 +1,12 @@
 package com.nikita.kut.android.simbirsoft_workshop.viewmodel
 
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.*
-import com.nikita.kut.android.simbirsoft_workshop.FilterFragment
-import com.nikita.kut.android.simbirsoft_workshop.data.CategoriesOfHelp
-import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
-import com.nikita.kut.android.simbirsoft_workshop.data.News
-import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
-import com.nikita.kut.android.simbirsoft_workshop.util.getJSONFromAssets
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import com.nikita.kut.android.simbirsoft_workshop.screens.FilterFragment
+import com.nikita.kut.android.simbirsoft_workshop.model.CategoriesOfHelp
+import com.nikita.kut.android.simbirsoft_workshop.model.News
+import com.nikita.kut.android.simbirsoft_workshop.util.SharedPreferenceModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,22 +68,22 @@ class NewsViewModel : ViewModel() {
         return userList
     }
 
-    fun initNewsFromJsonAssets(activity: FragmentActivity) {
-        newsScope.launch {
-            newsList = convertNewsJsonToInstance(activity)
-        }
-    }
-
-    private fun convertNewsJsonToInstance(activity: FragmentActivity): ArrayList<News> {
-        val newsJSONString = getJSONFromAssets(activity, "news.json")
-        val moshi = Moshi.Builder().build()
-
-        val listType = Types.newParameterizedType(List::class.java, News::class.java)
-        val adapter = moshi.adapter<List<News>>(listType)
-
-        val newsFromJson = adapter.fromJson(newsJSONString)
-        return newsFromJson as ArrayList<News>
-    }
+//    fun initNewsFromJsonAssets(activity: FragmentActivity) {
+//        newsScope.launch {
+//            newsList = convertNewsJsonToInstance(activity)
+//        }
+//    }
+//
+//    private fun convertNewsJsonToInstance(activity: FragmentActivity): ArrayList<News> {
+//        val newsJSONString = getJSONFromAssets(activity, "news.json")
+//        val moshi = Moshi.Builder().build()
+//
+//        val listType = Types.newParameterizedType(List::class.java, News::class.java)
+//        val adapter = moshi.adapter<List<News>>(listType)
+//
+//        val newsFromJson = adapter.fromJson(newsJSONString)
+//        return newsFromJson as ArrayList<News>
+//    }
 
     fun getCategoriesList(): List<String> {
         val children =

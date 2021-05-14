@@ -1,7 +1,7 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nikita.kut.android.simbirsoft_workshop.data.Friend
+import com.nikita.kut.android.simbirsoft_workshop.model.Friend
 
 class FriendDiffUtilCallback : DiffUtil.ItemCallback<Friend>() {
 

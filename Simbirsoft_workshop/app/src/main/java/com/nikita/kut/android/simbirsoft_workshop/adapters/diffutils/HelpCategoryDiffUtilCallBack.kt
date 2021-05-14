@@ -1,7 +1,7 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters.diffutils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
+import com.nikita.kut.android.simbirsoft_workshop.model.HelpCategory
 
 class HelpCategoryDiffUtilCallBack : DiffUtil.ItemCallback<HelpCategory>() {
 

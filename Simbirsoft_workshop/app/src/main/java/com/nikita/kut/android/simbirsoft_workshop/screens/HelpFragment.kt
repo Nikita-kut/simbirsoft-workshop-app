@@ -1,8 +1,6 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.HelpCategoryAdapter
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentHelpBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.ItemOffsetDecoration
@@ -17,7 +16,6 @@ import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.viewmodel.HelpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -43,6 +41,11 @@ class HelpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState == null) {
+            categoriesScope.launch {
+                helpViewModel.insertCategoriesListFromFirebaseToRoom()
+            }
+        }
         loadImitation()
         binding.bnvHelp.selectedItemId = R.id.item_help
         initCategoryList()
@@ -51,7 +54,7 @@ class HelpFragment : Fragment() {
 
     private fun loadImitation() {
         categoriesScope.launch {
-            helpViewModel.initCategoriesListFromDatabase()
+            helpViewModel.getCategoriesList()
             Thread.sleep(HelpViewModel.SLEEP_TIME)
             binding.progressBarHelp.visibility = View.GONE
 

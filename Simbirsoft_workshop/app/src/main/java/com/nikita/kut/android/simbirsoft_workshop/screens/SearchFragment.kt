@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.ViewPagerAdapter
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentSearchBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment

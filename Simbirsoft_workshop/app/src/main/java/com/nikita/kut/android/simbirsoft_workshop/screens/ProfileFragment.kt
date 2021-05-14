@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.app.Activity
 import android.content.Intent
@@ -13,16 +13,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.FriendAdapter
-import com.nikita.kut.android.simbirsoft_workshop.data.Friend
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentProfileBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.MaxCountLayoutManager
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.viewmodel.ProfileViewModel
-import kotlin.random.Random
 
 class ProfileFragment : Fragment(), ChangePhotoFragment.ChangePhotoClickListener {
 

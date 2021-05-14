@@ -3,7 +3,7 @@ package com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
+import com.nikita.kut.android.simbirsoft_workshop.model.HelpCategory
 import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemHelpBinding
 
 class HelpCategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
