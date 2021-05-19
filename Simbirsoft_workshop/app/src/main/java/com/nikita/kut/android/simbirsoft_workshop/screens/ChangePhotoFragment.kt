@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
+import com.nikita.kut.android.simbirsoft_workshop.R
 
 class ChangePhotoFragment : DialogFragment() {
 

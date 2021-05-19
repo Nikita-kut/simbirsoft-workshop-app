@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nikita.kut.android.simbirsoft_workshop.R
-import com.nikita.kut.android.simbirsoft_workshop.data.Friend
+import com.nikita.kut.android.simbirsoft_workshop.model.Friend
 import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemFriendBinding
 
 class FriendHolder(view: View) : RecyclerView.ViewHolder(view) {

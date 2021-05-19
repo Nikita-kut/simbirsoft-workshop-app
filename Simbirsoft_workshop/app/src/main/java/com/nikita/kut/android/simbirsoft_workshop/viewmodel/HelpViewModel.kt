@@ -1,25 +1,47 @@
 package com.nikita.kut.android.simbirsoft_workshop.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
+import com.nikita.kut.android.simbirsoft_workshop.data.database.CategoriesDB
+import com.nikita.kut.android.simbirsoft_workshop.model.HelpCategory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class HelpViewModel : ViewModel() {
 
     var categories = arrayListOf<HelpCategory>()
 
-    private val database = FirebaseDatabase.getInstance().reference.child(CATEGORIES_DB_TAG)
+    private var firebaseListCategories: ArrayList<HelpCategory> = arrayListOf()
 
-    fun initCategoriesListFromDatabase() {
-        database.addValueEventListener(
+    private val firebaseDB = FirebaseDatabase.getInstance().reference.child(CATEGORIES_DB_TAG)
+
+    private val categoriesDao = CategoriesDB.categoriesDBInstance.categoriesDao()
+
+    fun getCategoriesList() {
+        viewModelScope.launch {
+            categoriesDao.getAllCategories().collect {
+                categories = it as ArrayList<HelpCategory>
+            }
+        }
+    }
+
+    suspend fun insertCategoriesListFromFirebaseToRoom() {
+        categoriesDao.insertCategories(initCategoriesListFromDatabase())
+    }
+
+    private fun initCategoriesListFromDatabase(): ArrayList<HelpCategory> {
+        firebaseDB.addValueEventListener(
             object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(CATEGORIES_DB_TAG)) {
-                        val memberList = snapshot.child(CATEGORIES_DB_TAG).value as ArrayList<*>
-                        categories = getHelpCategoryList(memberList)
+                        viewModelScope.launch {
+                            val memberList = snapshot.child(CATEGORIES_DB_TAG).value as ArrayList<*>
+                            firebaseListCategories = getHelpCategoryList(memberList)
+                        }
                     }
                 }
 
@@ -28,6 +50,7 @@ class HelpViewModel : ViewModel() {
                 }
 
             })
+        return firebaseListCategories
     }
 
     private fun getHelpCategoryList(helpCategoryList: ArrayList<*>): ArrayList<HelpCategory> {
@@ -45,30 +68,6 @@ class HelpViewModel : ViewModel() {
         }
         return userList
     }
-
-    // get data from JSON assets
-
-//    fun initCategoriesFromJsonAssets(activity: FragmentActivity): ArrayList<HelpCategory> {
-//        categoriesScope.launch {
-//            Log.d(
-//                NewsViewModel.TAG,
-//                "Coroutine inside from thread = ${Thread.currentThread().name}"
-//            )
-//            categories = convertNewsJsonToInstance(activity)
-//        }
-//        return categories
-//    }
-//
-//    private fun convertNewsJsonToInstance(activity: FragmentActivity): ArrayList<HelpCategory> {
-//        val helpJSONString = getJSONFromAssets(activity, "categories.json")
-//        val moshi = Moshi.Builder().build()
-//
-//        val listType = Types.newParameterizedType(List::class.java, HelpCategory::class.java)
-//        val adapter = moshi.adapter<List<HelpCategory>>(listType)
-//
-//        val listCategory = adapter.fromJson(helpJSONString)
-//        return listCategory as ArrayList<HelpCategory>
-//    }
 
     companion object {
         const val CATEGORIES_DB_TAG = "categories"

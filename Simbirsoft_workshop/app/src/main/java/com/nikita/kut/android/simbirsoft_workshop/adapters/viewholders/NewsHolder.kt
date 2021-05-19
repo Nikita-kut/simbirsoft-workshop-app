@@ -1,11 +1,10 @@
 package com.nikita.kut.android.simbirsoft_workshop.adapters.viewholders
 
-import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter
-import com.nikita.kut.android.simbirsoft_workshop.data.News
+import com.nikita.kut.android.simbirsoft_workshop.model.News
 import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemNewsBinding
 
 class NewsHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {

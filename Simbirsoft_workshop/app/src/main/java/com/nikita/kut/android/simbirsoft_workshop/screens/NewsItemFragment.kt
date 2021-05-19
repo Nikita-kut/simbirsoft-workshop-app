@@ -1,13 +1,13 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.nikita.kut.android.simbirsoft_workshop.data.News
+import com.nikita.kut.android.simbirsoft_workshop.R
+import com.nikita.kut.android.simbirsoft_workshop.model.News
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentNewsItemBinding
 import kotlin.random.Random
 

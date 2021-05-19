@@ -1,19 +1,17 @@
 package com.nikita.kut.android.simbirsoft_workshop.viewmodel
 
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.*
-import com.nikita.kut.android.simbirsoft_workshop.FilterFragment
-import com.nikita.kut.android.simbirsoft_workshop.data.CategoriesOfHelp
-import com.nikita.kut.android.simbirsoft_workshop.data.HelpCategory
-import com.nikita.kut.android.simbirsoft_workshop.data.News
-import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
-import com.nikita.kut.android.simbirsoft_workshop.util.getJSONFromAssets
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import com.nikita.kut.android.simbirsoft_workshop.data.database.NewsDB
+import com.nikita.kut.android.simbirsoft_workshop.screens.FilterFragment
+import com.nikita.kut.android.simbirsoft_workshop.model.CategoriesOfHelp
+import com.nikita.kut.android.simbirsoft_workshop.model.News
+import com.nikita.kut.android.simbirsoft_workshop.util.SharedPreferenceModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsViewModel : ViewModel() {
@@ -22,25 +20,35 @@ class NewsViewModel : ViewModel() {
 
     var newsFilteredList = newsList
 
+    private var newsFirebaseList = arrayListOf<News>()
+
     private var categoriesList = listOf<String>()
 
-    private val newsScope = CoroutineScope(Dispatchers.Default)
+    private val firebaseDB = FirebaseDatabase.getInstance().getReference(NEWS_DB_TAG)
 
-    private var database = FirebaseDatabase.getInstance().getReference(NEWS_DB_TAG)
+    private val newsDao = NewsDB.newsDBInstance.newsDao()
 
-    fun initNewsFromDatabase() {
-        database.addValueEventListener(
+    fun getNewsList() {
+        viewModelScope.launch {
+            newsDao.getAllNews().collect {
+                newsList = it as ArrayList<News>
+            }
+        }
+    }
+
+    suspend fun insertCategoriesListFromFirebaseToRoom() {
+        newsDao.insertCategories(initNewsListFromDatabase())
+    }
+
+    private fun initNewsListFromDatabase(): ArrayList<News> {
+        firebaseDB.addValueEventListener(
             object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(NEWS_DB_TAG)) {
-                        newsScope.launch {
-                            Log.d(
-                                TAG_NEWS_FRAGMENT,
-                                "Coroutine inside from thread = ${Thread.currentThread().name}"
-                            )
+                        viewModelScope.launch {
                             val memberList = snapshot.child(NEWS_DB_TAG).value as ArrayList<*>
-                            newsList = getNewsList(memberList)
+                            newsFirebaseList = getNewsList(memberList)
                         }
                     }
                 }
@@ -50,6 +58,7 @@ class NewsViewModel : ViewModel() {
                 }
 
             })
+        return newsFirebaseList
     }
 
     private fun getNewsList(newsList: ArrayList<*>): ArrayList<News> {
@@ -71,23 +80,6 @@ class NewsViewModel : ViewModel() {
             index++
         }
         return userList
-    }
-
-    fun initNewsFromJsonAssets(activity: FragmentActivity) {
-        newsScope.launch {
-            newsList = convertNewsJsonToInstance(activity)
-        }
-    }
-
-    private fun convertNewsJsonToInstance(activity: FragmentActivity): ArrayList<News> {
-        val newsJSONString = getJSONFromAssets(activity, "news.json")
-        val moshi = Moshi.Builder().build()
-
-        val listType = Types.newParameterizedType(List::class.java, News::class.java)
-        val adapter = moshi.adapter<List<News>>(listType)
-
-        val newsFromJson = adapter.fromJson(newsJSONString)
-        return newsFromJson as ArrayList<News>
     }
 
     fun getCategoriesList(): List<String> {

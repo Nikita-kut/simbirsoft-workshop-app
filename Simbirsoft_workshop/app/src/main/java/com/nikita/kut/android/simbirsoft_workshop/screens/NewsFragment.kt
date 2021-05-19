@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter
 import com.nikita.kut.android.simbirsoft_workshop.adapters.NewsAdapter.OnNewsClickListener
-import com.nikita.kut.android.simbirsoft_workshop.data.News
-import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
+import com.nikita.kut.android.simbirsoft_workshop.model.News
+import com.nikita.kut.android.simbirsoft_workshop.util.SharedPreferenceModel
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentNewsBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragmentWithAddBackStack
 import com.nikita.kut.android.simbirsoft_workshop.viewmodel.NewsViewModel
 import com.nikita.kut.android.simbirsoft_workshop.viewmodel.NewsViewModel.Companion.SLEEP_TIME
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListener {
 
@@ -28,6 +32,8 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
 
     private val newsViewModel: NewsViewModel by activityViewModels()
 
+    private val newsScope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +43,13 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState == null) {
+            newsScope.launch {
+                newsViewModel.insertCategoriesListFromFirebaseToRoom()
+            }
+        }
         loadImitation()
         binding.bnvNews.selectedItemId = R.id.item_news
         SharedPreferenceModel.with(requireActivity().application)
@@ -49,11 +60,11 @@ class NewsFragment : Fragment(), FilterFragment.ClickListener, OnNewsClickListen
     }
 
     private fun loadImitation() {
-        newsViewModel.initNewsFromDatabase()
-        Handler().postDelayed({
+        newsScope.launch {
+            newsViewModel.getNewsList()
             Thread.sleep(SLEEP_TIME)
             binding.progressBarNews.visibility = View.GONE
-        }, 0)
+        }
     }
 
     private fun setBottomNavViewListener() {

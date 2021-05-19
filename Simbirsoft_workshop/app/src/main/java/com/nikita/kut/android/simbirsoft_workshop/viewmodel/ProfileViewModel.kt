@@ -2,7 +2,7 @@ package com.nikita.kut.android.simbirsoft_workshop.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.nikita.kut.android.simbirsoft_workshop.R
-import com.nikita.kut.android.simbirsoft_workshop.data.Friend
+import com.nikita.kut.android.simbirsoft_workshop.model.Friend
 import kotlin.random.Random
 
 class ProfileViewModel : ViewModel() {

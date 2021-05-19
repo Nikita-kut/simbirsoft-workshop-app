@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nikita.kut.android.simbirsoft_workshop.R
 import com.nikita.kut.android.simbirsoft_workshop.adapters.SearchResultAdapter
-import com.nikita.kut.android.simbirsoft_workshop.data.SearchResult
+import com.nikita.kut.android.simbirsoft_workshop.model.SearchResult
 import com.nikita.kut.android.simbirsoft_workshop.databinding.ItemViewPagerBinding
 import kotlin.random.Random
 

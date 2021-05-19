@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop
+package com.nikita.kut.android.simbirsoft_workshop.screens
 
 import android.content.Context
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.nikita.kut.android.simbirsoft_workshop.data.CategoriesOfHelp
-import com.nikita.kut.android.simbirsoft_workshop.data.SharedPreferenceModel
+import com.nikita.kut.android.simbirsoft_workshop.R
+import com.nikita.kut.android.simbirsoft_workshop.model.CategoriesOfHelp
+import com.nikita.kut.android.simbirsoft_workshop.util.SharedPreferenceModel
 import com.nikita.kut.android.simbirsoft_workshop.databinding.FragmentFilterBinding
 import com.nikita.kut.android.simbirsoft_workshop.util.openFragment
 

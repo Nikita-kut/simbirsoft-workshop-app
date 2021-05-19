@@ -1,4 +1,4 @@
-package com.nikita.kut.android.simbirsoft_workshop.data
+package com.nikita.kut.android.simbirsoft_workshop.util
 
 import android.app.Application
 import android.content.Context
