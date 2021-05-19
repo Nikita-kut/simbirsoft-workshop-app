@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.nikita.kut.android.simbirsoft_workshop.data.database.CategoriesDB
 import com.nikita.kut.android.simbirsoft_workshop.model.HelpCategory
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HelpViewModel : ViewModel() {
@@ -22,19 +23,17 @@ class HelpViewModel : ViewModel() {
 
     fun getCategoriesList() {
         viewModelScope.launch {
-            categories = initCategoriesListFromRoom()
+            categoriesDao.getAllCategories().collect {
+                categories = it as ArrayList<HelpCategory>
+            }
         }
-    }
-
-    suspend fun initCategoriesListFromRoom(): ArrayList<HelpCategory> {
-        return categoriesDao.getAllCategories() as ArrayList<HelpCategory>
     }
 
     suspend fun insertCategoriesListFromFirebaseToRoom() {
         categoriesDao.insertCategories(initCategoriesListFromDatabase())
     }
 
-    fun initCategoriesListFromDatabase(): ArrayList<HelpCategory> {
+    private fun initCategoriesListFromDatabase(): ArrayList<HelpCategory> {
         firebaseDB.addValueEventListener(
             object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

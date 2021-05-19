@@ -9,11 +9,13 @@ object CategoriesDB {
         private set
 
     fun init(context: Context) {
-        categoriesDBInstance = Room.databaseBuilder(
+        categoriesDBInstance =
+            Room.databaseBuilder(
             context,
             DataBaseCategories::class.java,
             DataBaseCategories.DB_NAME
-        ).build()
+        )
+            .build()
     }
 
 }

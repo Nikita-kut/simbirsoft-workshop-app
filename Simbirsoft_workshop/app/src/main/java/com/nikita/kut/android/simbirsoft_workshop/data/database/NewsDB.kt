@@ -10,6 +10,11 @@ object NewsDB {
 
     fun init(context: Context) {
         newsDBInstance =
-            Room.databaseBuilder(context, DataBaseNews::class.java, DataBaseNews.DB_NAME).build()
+            Room.databaseBuilder(
+                context,
+                DataBaseNews::class.java,
+                DataBaseNews.DB_NAME
+            )
+                .build()
     }
 }
