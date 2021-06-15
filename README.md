@@ -728,3 +728,62 @@
 
 1. Перпеписать свое приложение, применяя архитектурный подход Clean Architecture. В реализации presentation слоя применить архитектурный паттерн MVP с использованием библиотеки Moxy. Для предоставления зависимостей в соотвествии с техникой DI использовать библиотеку Dagger 
 2. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+
+
+
+---
+## XIII. Реактивное программирование
+---
+
+**1. Понятие реактивности**
++ [Концепция](https://habrahabr.ru/post/279715/)  **(\*\*\*\*)**
++ [RxMarbles](http://rxmarbles.com/)  **(\*\*\*)**
+
+**2. RxJava**
++ [RxJava](https://github.com/ReactiveX/RxJava)  **(\*\*\*\*)**
++ [reactivex](http://reactivex.io/)  **(\*\*)**
++ [Введение в RxJava: Почему Rx?](https://habrahabr.ru/post/269417/)  **(\*\*)**
++ [Подробно о различиях между subscribeOn и observeOn](https://proandroiddev.com/understanding-rxjava-subscribeon-and-observeon-744b0c6a41ea)  **(\*\*)**
+
+**3. Android расширения**
++ [RxAndroid (позволяет легко переключаться на main поток)](https://github.com/ReactiveX/RxAndroid)  **(\*\*\*)**
++ [RxBinding](https://github.com/JakeWharton/RxBinding)  **(\*\*\*)**
++ [Использование RxJava совместно с RxBinding](https://github.com/codepath/android_guides/wiki/RxJava-and-RxBinding)  **(\*\*\*)**
+
+
+
+---
+## XIV. WorkManager. Push Notifications. BroadcastReceiver. Deep Links
+---
+### Теоретическая часть
+
+**1. BroadcastReceiver**  
++ [BroadcastReceiver - основы](https://developer.android.com/guide/components/broadcasts) **(\*\*\*\*)**
++ [Broadcast Limitations Android 8.0+](https://developer.android.com/about/versions/oreo/background#broadcasts) **(\*\*)**
++ [Implicit Broadcast Exceptions](https://developer.android.com/guide/components/broadcast-exceptions.html) **(\*\*)**
+
+**2. Push Notifications**  
++ [Push Notifications - основы](https://developer.android.com/guide/topics/ui/notifiers/notifications) **(\*\*\*\*)**
++ [Notification priority levels](https://material.io/design/platform-guidance/android-notifications.html#settings) **(\*\*)**
++ [FCM FAQ](https://firebase.google.com/support/faq/#cloud-messaging}) **(\*)**
+
+**3. WorkManager**
++ [Job Scheduler](http://ticketmastermobilestudio.com/blog/how-to-use-androids-job-scheduler) **(\*\*\*\*)**
++ [WorkManager - основы](https://developer.android.com/topic/libraries/architecture/workmanager) **(\*\*\*\*)**
++ [WorkManager - типы Constraints](https://developer.android.com/reference/androidx/work/Constraints.Builder.html) **(\*\*)**
++ [Цикл статей "Introducing WorkManager"](https://medium.com/androiddevelopers/introducing-workmanager-2083bcfc4712) **(\*\*)**
++ [Видео "WorkManager: Beyond the Basics"](https://www.youtube.com/watch?v=Bz0z694SrEE&feature=youtu.be) **(\*\*)**
+
+**4. Deep links**
++ [Deep links и App links - в чем разница?](https://developer.android.com/training/app-links) **(\*\*\*\*)**
++ [Создание Deep links](https://developer.android.com/training/app-links/deep-linking) **(\*\*\*\*)**
++ [Android app linking types](https://simonmarquis.github.io/Android-App-Linking/) - очень удобная сравнительная таблица **(\*\*\*)**
+
+**5. Codelabs**
++ [BroadcastReceivers](https://codelabs.developers.google.com/codelabs/android-training-broadcast-receivers/index.html) **(\*\*)**
++ [Alarm Manager](https://codelabs.developers.google.com/codelabs/android-training-alarm-manager/index.html) **(\*\*)**
++ [Push Notifications](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-notifications/#0) **(\*\*\*)**
++ [FCM](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-notifications-fcm/#0) **(\*\*)**
++ [WorkManager](https://codelabs.developers.google.com/codelabs/android-workmanager/index.html) **(\*\*\*)**
++ [WorkManager Advanced](https://codelabs.developers.google.com/codelabs/android-adv-workmanager/index.html) **(\*\*\*)**
+
