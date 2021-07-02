@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "399019716272",
+    "project_id": "simbirsoft-workshop-app",
+    "storage_bucket": "simbirsoft-workshop-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399019716272:android:d07930adcbbe8bfc699575",
+        "android_client_info": {
+          "package_name": "com.nikita.kut.android.simbirsoft_workshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399019716272-0vjp10ihiiefe2kv771o8vh8c4chntds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQWS7wjlbX2_pcH8Ib7nx-27ahp386goA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399019716272-0vjp10ihiiefe2kv771o8vh8c4chntds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

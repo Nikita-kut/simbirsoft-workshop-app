@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextStyle">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextStyle.BlueGrey">
+        <item name="android:textColor">@color/blue_grey</item>
+    </style>
+
+    <style name="TextStyle.Black87">
+        <item name="android:textColor">@color/black_87</item>
+    </style>
+
+    <style name="TextStyle.Black70">
+        <item name="android:textColor">@color/black_70</item>
+    </style>
+
+    <style name="TextStyle.Black38">
+        <item name="android:textColor">@color/black_38</item>
+    </style>
+
+    <style name="TextStyle.BlueGrey.21">
+        <item name="android:textSize">21sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
+
+    <style name="TextStyle.Black87.16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="TextStyle.Black87.16.NoCenter">
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="TextStyle.Black70.14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="TextStyle.11">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="TextStyle.Black87.24">
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextStyle.Black38.12">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+</resources>

@@ -1,0 +1,54 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "image": "image_man",
+      "title": "How To Use - 5 EASY steps",
+      "body": "Can You Really Find NEWS (on the Web)?",
+      "date": "08/03/1935",
+      "category": [
+        "CHILDREN"
+      ]
+    },
+    {
+      "id": 2,
+      "image": "image_man",
+      "title": "4 Ways You Can Grow Your Creativity Using NEWS",
+      "body": "How To Make More NEWS By Doing Less",
+      "date": "10/20/1917",
+      "category": [
+        "ADULT"
+      ]
+    },
+    {
+      "id": 3,
+      "image": "image_man",
+      "title": "How To Win Buyers And Influence Sales with NEWS",
+      "body": "Want More Money? Start NEWS",
+      "date": "04/20/1945",
+      "category": [
+        "ELDERLY"
+      ]
+    },
+    {
+      "id": 4,
+      "image": "image_man",
+      "title": "The NEWS Mystery Revealed",
+      "body": "Congratulations! Your NEWS Is (Are) About To Stop Being Relevant",
+      "date": "10/21/2005",
+      "category": [
+        "ANIMALS"
+      ]
+    },
+    {
+      "id": 5,
+      "image": "image_man",
+      "title": "What Is NEWS and How Does It Work?",
+      "body": "The Death Of NEWS And How To Avoid It",
+      "date": "09/10/1998",
+      "category": [
+        "EVENTS"
+      ]
+    }
+  ]
+}
